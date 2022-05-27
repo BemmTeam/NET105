@@ -18,7 +18,7 @@ namespace NET105.Entities
         public string Name {get;set;}
         
         [Display(Name = "Số lượng")]
-        [Required(ErrorMessage = "{0} là phải nhập")]
+   
         public int Quantity {get;set;}
 
         [Display(Name = "Giá món ăn")]
@@ -32,12 +32,18 @@ namespace NET105.Entities
 
         [Display(Name = "Hình ảnh")]
         public string ImageUrl {get;set;}
+        
+        [Column(TypeName = "nvarchar(200)")]
+        [Display(Name = "Địa chỉ")]
+        [Required(ErrorMessage = "{0} là phải nhập")]
+        [StringLength(200 , ErrorMessage = "{0} chỉ được nhập từ {2} đến {1} ký tự" , MinimumLength = 4)]
+        public string Address {get;set;}
 
 
         // khóa ngoại
-        public Guid CategoryId {get;set;}
+        public int CategoryId {get;set;}
         [ForeignKey("CategoryId")]
-        public Category Category {get;set;}
+        public  Category Category {get;set;}
 
     }
 }

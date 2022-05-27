@@ -1,0 +1,17 @@
+@using NET105.Helper
+
+@{
+    MessageHelper Alert = null;
+    if(TempData["Message"] != null && TempData["MessageType"] != null) {
+
+        string message = TempData["Message"].ToString();
+        string messageType = TempData["MessageType"].ToString();
+        Alert = new MessageHelper( message,messageType);
+     
+    }   
+}
+
+@if (Alert != null)
+{
+    <div class="@Alert.MessageType"><i class="@Alert.Icon"></i> @Alert.Message</div>
+}

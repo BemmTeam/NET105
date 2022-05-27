@@ -1,0 +1,39 @@
+@model NET105.Entities.Payment
+
+@{
+    ViewData["Title"] = "Chi tiết thanh toán";
+}
+
+<div>
+    <a class="btn btn-primary col-3" asp-action="Index"><i class="far fa-caret-square-left"></i> Quay lại</a>
+    <hr>
+       <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="btn btn-warning text-light" asp-action="Edit" asp-route-id="@Model.PaymentId"><i class="fas fa-edit"></i>
+        Edit</a>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

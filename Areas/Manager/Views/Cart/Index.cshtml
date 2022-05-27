@@ -1,0 +1,102 @@
+@model IPagedList<NET105.Entities.Cart>
+@using Z.PagedList;
+@using Z.PagedList.Mvc.Core;
+@{
+    ViewData["Title"] = "Danh sách giỏ hàng";
+}
+
+<div class="row">
+
+    @await Html.PartialAsync("_MessagePartial")
+    <div class="col-sm-12">
+        <div class="white-box">
+            <a asp-action="Create" class="btn btn-primary text-light"><i class="fas fa-plus-circle"></i> Thêm giỏ hàng</a>
+            <form method="get" class="row mt-2">
+                <div class="col-10">
+                    <input id="searchString" value="@ViewBag.searchString" name="searchString"
+                        class="col-12 form-control" placeholder="Nhập tên giỏ hàng" type="date">
+                </div>
+                <div class="col-2">
+                    <button type="submit" class="col-12 btn btn-success"><i class="fas fa-search"></i> Tìm kiếm</button>
+                </div>
+            </form>
+            <hr>
+            <div class="table-responsive">
+                <table class="table text-nowrap">
+                    <thead>
+                        <tr>
+                            <th class="border-top-0">
+                                @Html.DisplayNameFor(model => Model[0].CreatedDate)
+                            </th>
+                            <th class="border-top-0">
+                                @Html.DisplayNameFor(model => Model[0].Completed)
+                            </th>
+                            <th class="border-top-0">
+                                @Html.DisplayNameFor(model => Model[0].Address)
+                            </th>
+                            <th class="border-top-0">
+                                @Html.DisplayNameFor(model => Model[0].Status)
+                            </th>
+                            <th class="border-top-0">
+                                @Html.DisplayNameFor(model => Model[0].CartDetail_Json)
+                            </th>
+                            <th class="border-top-0">
+                                @Html.DisplayNameFor(model => Model[0].User)
+                            </th>
+                            <th class="border-top-0">
+                                @Html.DisplayNameFor(model => Model[0].Payment)
+                            </th>
+
+                            <th class="border-top-0"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Completed)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Address)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Status)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CartDetail_Json)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.User.Id)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Payment.Name)
+                                </td>
+
+                                <td>
+                                    <a class="btn btn-warning text-light" asp-action="Edit"
+                                    asp-route-id="@item.CartId"><i class="fas fa-edit"></i> Edit</a>
+                                    <a class="btn btn-dark text-light" asp-action="Details"
+                                    asp-route-id="@item.CartId"><i class="fas fa-info-circle"></i> Details</a>
+                                    <a class="btn btn-danger text-light" asp-action="Delete"
+                                    asp-route-id="@item.CartId"><i class="fas fa-trash"></i> Delete</a>
+                                </td>
+                            </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+            @Html.PagedListPager(Model,page => Url.Action("Index" , new {page , searchString =
+            ViewBag.searchString}),new Z.PagedList.Web.Common.PagedListRenderOptions{
+            LiElementClasses = new string[] {"page-item"},
+            PageClasses = new string[] {"page-link"},
+            })
+        </div>
+    </div>
+</div>

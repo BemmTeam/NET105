@@ -33,5 +33,10 @@ namespace NET105.Entities
 
         public string District {get;set;}
 
+        [NotMapped]
+         [Display(Name = "Mật khẩu")]
+        [Required(ErrorMessage = "{0} là phải nhập")]
+        public string Password {get;set;}
+
     }
 }

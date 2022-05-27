@@ -9,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NET105.Interface;
+using NET105.Repository;
 
 namespace NET105
 {
@@ -27,6 +29,17 @@ namespace NET105
             services.AddControllersWithViews();
             services.AddDbContext<ShopContext>(option => 
             option.UseSqlServer(Configuration.GetConnectionString("Shop")));
+
+            
+            services.AddTransient<IProduct,ProductRepository>();
+            services.AddTransient<ICategory,CategoryRepository>();
+            services.AddTransient<IPayment,PaymentRepository>();
+            services.AddTransient<Icart,CartRepository>();
+            services.AddTransient<IUser,UserRepository>();
+
+
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

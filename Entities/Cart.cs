@@ -60,6 +60,6 @@ namespace NET105.Entities
 
         [ForeignKey("PaymentId")]
         [Display(Name = "Phương thức thanh toán")]
-        public Payment Payment {get;set;}
+        public  Payment Payment {get;set;}
     }
 }

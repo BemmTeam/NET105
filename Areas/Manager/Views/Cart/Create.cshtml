@@ -1,0 +1,98 @@
+@model NET105.Entities.Cart
+@using NET105.Entities
+@{
+    ViewData["Title"] = "Thêm giỏ hàng";
+}
+
+
+<div class="row">
+    @await Html.PartialAsync("_MessagePartial")
+    <div class="col-sm-12">
+        <a class="btn btn-primary col-3" asp-action="Index"><i class="far fa-caret-square-left"></i> Quay lại</a>
+        <hr>
+        <div class="white-box row">
+
+            <div class="col-lg-4 col-xlg-3 col-md-12">
+               
+            </div>
+            <!-- Column -->
+            <!-- Column -->
+            <div class="col-lg-12 col-xlg-9 col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form method="post" asp-action="Create" class="form-horizontal form-material">
+
+                            <div class="form-group mb-4">
+                                <label class="col-md-12 p-0">@Html.DisplayNameFor(item => item.CreatedDate)</label>
+                                <div class="col-md-12 border-bottom p-0">
+                                    <input asp-for="CreatedDate" type="date" class="form-control p-0 border-0">
+                                </div>
+                                <span class="badge bg-danger text-light" asp-validation-for="CreatedDate"></span>
+                            </div>
+
+
+                            <div class="form-group mb-4">
+                                <label class="col-md-12 p-0">@Html.DisplayNameFor(item => item.Completed)</label>
+                                <div class="col-md-12 border-bottom p-0">
+                                    <input asp-for="Completed" type="date" class="form-control p-0 border-0">
+                                </div>
+                                <span class="badge bg-danger text-light" asp-validation-for="Completed"></span>
+                            </div>
+
+                          
+                            <div class="form-group mb-4">
+                                <label class="col-md-12 p-0">@Html.DisplayNameFor(item => item.Address)</label>
+                                <div class="col-md-12 border-bottom p-0">
+                                    <input asp-for="Address" type="text" class="form-control p-0 border-0">
+                                </div>
+                                <span class="badge bg-danger text-light" asp-validation-for="Address"></span>
+                            </div>
+
+                              <div class="form-group mb-4">
+                                <label class="col-md-12 p-0">@Html.DisplayNameFor(item => item.Status)</label>
+                                <div class="col-md-12 border-bottom p-0">
+                                  <select asp-for="Status" class="form-control" asp-items="@Html.GetEnumSelectList<StatusType>()"></select>
+                                </div>
+                                <span class="badge bg-danger text-light" asp-validation-for="Status"></span>
+                            </div>
+
+                              <div class="form-group mb-4">
+                                <label class="col-md-12 p-0">@Html.DisplayNameFor(item => item.CartDetail_Json)</label>
+                                <div class="col-md-12 border-bottom p-0">
+                                    <textarea asp-for="CartDetail_Json" type="text" class="form-control p-0 border-0"></textarea>
+                                </div>
+                                <span class="badge bg-danger text-light" asp-validation-for="CartDetail_Json"></span>
+                            </div>
+                            
+                              <div class="form-group mb-4">
+                                <label class="col-md-12 p-0">@Html.DisplayNameFor(item => item.PaymentId)</label>
+                                <div class="col-md-12 border-bottom p-0">
+                                  <select asp-for="PaymentId" class="form-control" asp-items="ViewBag.PaymentId"></select>
+                                </div>
+                                <span class="badge bg-danger text-light" asp-validation-for="PaymentId"></span>
+                            </div>
+
+                              <div class="form-group mb-4">
+                                <label class="col-md-12 p-0">@Html.DisplayNameFor(item => item.UserId)</label>
+                                <div class="col-md-12 border-bottom p-0">
+                                  <select asp-for="UserId" class="form-control" asp-items="ViewBag.UserId"></select>
+                                </div>
+                                <span class="badge bg-danger text-light" asp-validation-for="UserId"></span>
+                            </div>
+
+
+
+
+                            <div class="form-group mb-4">
+                                <div class="col-sm-12">
+                                    <button type="submit" class="btn btn-success"><i class="fas fa-plus-circle"></i> Thêm giỏ hàng</button>
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
