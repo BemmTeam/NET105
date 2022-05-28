@@ -1,0 +1,18 @@
+@using NET105.Helper;
+@model SummerNoteHelper;
+
+
+
+    @if (Model.loadScript)
+    {
+        <link rel="stylesheet" href="~/lib/Summernote/summernote-bs4.min.css">
+        <script src="~/lib/Summernote/summernote-bs4.min.js"></script>
+    }
+
+    <script>
+      $('#@Model.Id').summernote({
+
+        height: @Model.Height,
+        toolbar: @Html.Raw(Model.ToolBar)
+      });
+    </script>

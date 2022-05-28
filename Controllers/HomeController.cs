@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using NET105.Interface;
 using NET105.Models;
 
 namespace NET105.Controllers
@@ -13,14 +14,20 @@ namespace NET105.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IProduct productScv ;
+
+        public HomeController(ILogger<HomeController> logger, IProduct _productScv)
         {
+            
             _logger = logger;
+            productScv = _productScv;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var products = productScv.GetProductsAsync();
+            products = products.OrderBy(p => p.Price).Take(8);
+            return View(products.AsEnumerable());
         }
 
         public IActionResult Privacy()

@@ -27,6 +27,13 @@ using NET105.Models;
 #line hidden
 #nullable disable
 #nullable restore
+#line 3 "D:\Study\NET105\ASM\NET105\Views\_ViewImports.cshtml"
+using NET105.Entities;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
 #line 1 "D:\Study\NET105\ASM\NET105\Views\Shared\_MessagePartial.cshtml"
 using NET105.Helper;
 
@@ -34,7 +41,7 @@ using NET105.Helper;
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"1efd425d5c38dc2f92730aa5f36bdb1b33462f33", @"/Views/Shared/_MessagePartial.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"9f4acbd6a3eb3ae0ca36ec6b1a0be8265d77d825", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"2cd43b99c97b44981ba234a18ab88ebaa3b572f7", @"/Views/_ViewImports.cshtml")]
     public class Views_Shared__MessagePartial : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998

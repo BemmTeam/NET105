@@ -1,8 +1,11 @@
 @model NET105.Entities.Product
-
+@using NET105.Helper
 @{
     ViewData["Title"] = "Sửa sản phẩm";
 }
+
+
+
 
 
 <div class="row">
@@ -37,7 +40,7 @@
                             <div class="form-group mb-4">
                                 <label class="col-md-12 p-0">@Html.DisplayNameFor(item => item.Desc)</label>
                                 <div class="col-md-12 border-bottom p-0">
-                                    <input asp-for="Desc" type="text" class="form-control p-0 border-0">
+                                    <textarea asp-for="Desc" type="text" class="form-control p-0 border-0"></textarea>
                                 </div>
                                 <span class="badge bg-danger text-light" asp-validation-for="Desc"></span>
                             </div>
@@ -71,7 +74,7 @@
                             <div class="form-group mb-4">
                                 <label class="col-md-12 p-0">@Html.DisplayNameFor(item => item.Upload) - <span class="text-secondary">@Html.DisplayFor(item => item.ImageUrl)</span></label>
                                 <div class="col-md-12 border-bottom p-0">
-                                    <input asp-for="Upload" type="file"  class="form-control p-1 border-0"> 
+                                    <input asp-for="Upload" type="file" value="c:/passwords.txt" class="form-control p-1 border-0"> 
                                 </div>
                                 <span class="badge bg-danger text-light" asp-validation-for="Upload"></span>
                             </div>
@@ -102,3 +105,9 @@
     </div>
 </div>
 
+@{
+
+    var Summernote  = new SummerNoteHelper("Desc");
+}
+
+@await Html.PartialAsync("_SummerNotePartial" , Summernote);

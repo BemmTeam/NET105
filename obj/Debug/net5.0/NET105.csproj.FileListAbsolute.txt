@@ -182,3 +182,5 @@ D:\Study\NET105\ASM\NET105\obj\Debug\net5.0\NET105.dll
 D:\Study\NET105\ASM\NET105\obj\Debug\net5.0\ref\NET105.dll
 D:\Study\NET105\ASM\NET105\obj\Debug\net5.0\NET105.pdb
 D:\Study\NET105\ASM\NET105\obj\Debug\net5.0\NET105.genruntimeconfig.cache
+D:\Study\NET105\ASM\NET105\obj\Debug\net5.0\Razor\Views\Shared\_SummerNotePartial.cshtml.g.cs
+D:\Study\NET105\ASM\NET105\obj\Debug\net5.0\Razor\Views\Shared\_LayoutIndex.cshtml.g.cs

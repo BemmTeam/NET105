@@ -1,5 +1,5 @@
 @model NET105.Entities.Category
-
+@using NET105.Helper
 @{
     ViewData["Title"] = "Sửa danh mục";
 }
@@ -64,3 +64,9 @@
     </div>
 </div>
 
+@{
+
+    var Summernote  = new SummerNoteHelper("Desc");
+}
+
+@await Html.PartialAsync("_SummerNotePartial" , Summernote);

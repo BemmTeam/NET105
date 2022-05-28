@@ -26,7 +26,7 @@ namespace NET105.Repository
             product.ProductId = Guid.NewGuid();
             try
             {
-                 bool? upload = await uploadHelper.UploadFileAsync(product.Upload) ;
+                bool? upload = await uploadHelper.UploadFileAsync(product.Upload);
                 if (upload is null) return null;
                 else if (upload == true)
                 {
@@ -63,27 +63,31 @@ namespace NET105.Repository
             }
         }
 
-        public async Task<bool?> EditAsync(Guid id, Product product)
+        public async Task<bool?> EditAsync(Guid id, Product product, bool update = true)
         {
-              
+
 
             try
             {
-                bool? upload = await uploadHelper.UploadFileAsync(product.Upload) ;
-                if (upload is null) return null;
-                else if (upload == true)
-                {   
-                    // xóa file cũ đi 
-                    uploadHelper.DeleteFile(product.ImageUrl);
-                    // cập nhật url file mới
-                    product.ImageUrl = product.Upload.FileName;
-                    context.Update(product);
-                    var result = await context.SaveChangesAsync();
+                if (update)
+                {
+                    bool? upload = await uploadHelper.UploadFileAsync(product.Upload);
+                    if (upload is null) return null;
+                    else if (upload == true)
+                    {
+                        // xóa file cũ đi 
+                        uploadHelper.DeleteFile(product.ImageUrl);
+                        // cập nhật url file mới
+                        product.ImageUrl = product.Upload.FileName;
 
-                    return true;
+                    }
                 }
 
-                return false;
+                context.Update(product);
+                var result = await context.SaveChangesAsync();
+                return true;
+
+  
             }
             catch (DbUpdateConcurrencyException)
             {

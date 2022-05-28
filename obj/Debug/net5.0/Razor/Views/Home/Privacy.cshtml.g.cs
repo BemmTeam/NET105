@@ -26,8 +26,22 @@ using NET105.Models;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 3 "D:\Study\NET105\ASM\NET105\Views\_ViewImports.cshtml"
+using NET105.Entities;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 4 "D:\Study\NET105\ASM\NET105\Views\_ViewImports.cshtml"
+using NET105.Helper;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"d8ddb6bffa5a9b264bf8f89038bf03c234083fd3", @"/Views/Home/Privacy.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"9f4acbd6a3eb3ae0ca36ec6b1a0be8265d77d825", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"2cd43b99c97b44981ba234a18ab88ebaa3b572f7", @"/Views/_ViewImports.cshtml")]
     public class Views_Home_Privacy : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998

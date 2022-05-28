@@ -15689,6 +15689,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "d:\\Study\\NET105\\ASM\\NET105\\Views\\Shared\\_LayoutIndex.cshtml",
+      "TargetPath": "Views\\Shared\\_LayoutIndex.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "d:\\Study\\NET105\\ASM\\NET105\\Areas\\Manager\\Views\\Product\\Index.cshtml",
       "TargetPath": "Areas\\Manager\\Views\\Product\\Index.cshtml",
       "FileKind": "mvc"
@@ -15791,6 +15796,11 @@
     {
       "FilePath": "d:\\Study\\NET105\\ASM\\NET105\\Areas\\Manager\\Views\\Cart\\Create.cshtml",
       "TargetPath": "Areas\\Manager\\Views\\Cart\\Create.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "d:\\Study\\NET105\\ASM\\NET105\\Views\\Shared\\_SummerNotePartial.cshtml",
+      "TargetPath": "Views\\Shared\\_SummerNotePartial.cshtml",
       "FileKind": "mvc"
     },
     {

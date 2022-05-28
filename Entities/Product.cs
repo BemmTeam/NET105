@@ -50,7 +50,6 @@ namespace NET105.Entities
 
         [NotMapped]
         [DataType(DataType.Upload)]
-        [Required(ErrorMessage = "Chọn file upload")]
         [Display(Name = "Hình ảnh")]
         [CheckFile(Extensions = "jpg,png,gif")]
         public IFormFile Upload {get;set;}

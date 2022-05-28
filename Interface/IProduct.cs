@@ -12,7 +12,7 @@ namespace NET105.Interface
  
         public Task<Product> GetProductAsync(Guid? id);
 
-        public Task<bool?> EditAsync(Guid id , Product product);
+        public Task<bool?> EditAsync(Guid id , Product product , bool update = true);
 
         public  Task<bool> DeleteAsync(Guid id);
 

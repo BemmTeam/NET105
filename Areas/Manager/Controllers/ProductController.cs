@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -132,12 +134,15 @@ namespace NET105.Areas.Controllers
             
             if (id != product.ProductId)
             {
+                
+
                 return NotFound();
             }
-
-            if (ModelState.IsValid)
+            
+        
+            if (  ModelState.IsValid )
             {
-                bool? result = await repository.EditAsync(id , product);
+                bool? result = await repository.EditAsync(id , product , product.Upload != null);
                 if(result == true)
                 {
                     Message = "Cập nhật thành công !";

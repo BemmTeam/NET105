@@ -12,7 +12,7 @@ namespace NET105.Interface
  
         public Task<User> GetUserAsync(string id);
 
-        public Task<bool> EditAsync(string id , User user);
+        public Task<bool> EditAsync(string id , User user );
 
         public Task<bool> CreateAsync(User user);
 
