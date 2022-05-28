@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NET105.Helper;
 using NET105.Interface;
 using NET105.Repository;
 
@@ -30,13 +31,16 @@ namespace NET105
             services.AddDbContext<ShopContext>(option => 
             option.UseSqlServer(Configuration.GetConnectionString("Shop")));
 
-            
+
             services.AddTransient<IProduct,ProductRepository>();
             services.AddTransient<ICategory,CategoryRepository>();
             services.AddTransient<IPayment,PaymentRepository>();
             services.AddTransient<Icart,CartRepository>();
             services.AddTransient<IUser,UserRepository>();
 
+
+            // Add helpder
+            services.AddScoped<IUploadHelper , UploadHelper>();
 
 
 

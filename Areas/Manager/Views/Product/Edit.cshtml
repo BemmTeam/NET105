@@ -20,9 +20,11 @@
             <div class="col-lg-12 col-xlg-9 col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <form method="post" asp-action="Edit" asp-route-id="@Model.ProductId"
+                        <form method="post" asp-action="Edit" asp-route-id="@Model.ProductId"  enctype="multipart/form-data" 
                             class="form-horizontal form-material">
                             <input asp-for="ProductId" hidden>
+                            <input asp-for="ImageUrl" hidden>
+
                             <div class="form-group mb-4">
                                 <label class="col-md-12 p-0">@Html.DisplayNameFor(item => item.Name)</label>
                                 <div class="col-md-12 border-bottom p-0">
@@ -65,14 +67,16 @@
                             </div>
 
 
-
+                            
                             <div class="form-group mb-4">
-                                <label class="col-md-12 p-0">@Html.DisplayNameFor(item => item.ImageUrl)</label>
+                                <label class="col-md-12 p-0">@Html.DisplayNameFor(item => item.Upload) - <span class="text-secondary">@Html.DisplayFor(item => item.ImageUrl)</span></label>
                                 <div class="col-md-12 border-bottom p-0">
-                                    <input asp-for="ImageUrl" type="text" class="form-control p-0 border-0">
+                                    <input asp-for="Upload" type="file"  class="form-control p-1 border-0"> 
                                 </div>
-                                <span class="badge bg-danger text-light" asp-validation-for="ImageUrl"></span>
+                                <span class="badge bg-danger text-light" asp-validation-for="Upload"></span>
                             </div>
+
+
 
                             <div class="form-group mb-4">
                                 <label class="col-md-12 p-0">@Html.DisplayNameFor(item => item.Category)</label>

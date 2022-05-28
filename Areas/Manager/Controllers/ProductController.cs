@@ -19,18 +19,17 @@ namespace NET105.Areas.Controllers
     {
         private readonly IProduct repository;
 
+    
         
         [TempData]
         public string Message {get;set;}
 
         [TempData]
         public string MessageType {get;set;}
-        public ProductController(IProduct _repository)
+        public ProductController(IProduct _repository )
         {
-           
-
             repository = _repository;
- 
+         
         }
 
         // GET: Product
@@ -75,11 +74,13 @@ namespace NET105.Areas.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductId,Name,Quantity,Price,Desc,ImageUrl,Address,CategoryId")] Product product)
+        public async Task<IActionResult> Create([Bind("ProductId,Name,Quantity,Price,Desc,ImageUrl,Address,CategoryId,Upload")] Product product)
         {
+            Console.WriteLine("Upload file name: " + product.Upload.FileName);
             if (ModelState.IsValid)
             {
-                if(await repository.CreateAsync(product))
+                bool? result = await repository.CreateAsync(product) == true;
+                if(result == true)
                 {
                     Message = "Thêm món ăn thành công !";
                     MessageType = MessageHelper.success;
@@ -87,9 +88,24 @@ namespace NET105.Areas.Controllers
                     return RedirectToAction(nameof(Index));
 
                 }
+                else if(result is null)
+                {
+                    Message = "Hình ảnh đã tồn tại !";
+                    MessageType = MessageHelper.error;
+                  
+                }
+                else {
+                    
+                    Message = "Không upload được hình ảnh !";
+                    MessageType = MessageHelper.error;
+                }
             }
-            Message = "Thêm món ăn không thành công !";
-            MessageType = MessageHelper.error;
+            else 
+            {
+                  Message = "Thêm món ăn không thành công !";
+                  MessageType = MessageHelper.error;
+            }
+          
             ViewData["CategoryId"] = repository.GetSelectListCategory(product.CategoryId);
             return View(product);
         }
@@ -111,7 +127,7 @@ namespace NET105.Areas.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("ProductId,Name,Quantity,Price,Desc,ImageUrl,Address,CategoryId")] Product product)
+        public async Task<IActionResult> Edit(Guid id, [Bind("ProductId,Name,Quantity,Price,Desc,ImageUrl,Address,CategoryId,Upload")] Product product)
         {
             
             if (id != product.ProductId)
@@ -121,16 +137,31 @@ namespace NET105.Areas.Controllers
 
             if (ModelState.IsValid)
             {
-               
-                if(await repository.EditAsync(id , product))
+                bool? result = await repository.EditAsync(id , product);
+                if(result == true)
                 {
                     Message = "Cập nhật thành công !";
                     MessageType = MessageHelper.success;
+                    return RedirectToAction(nameof(Index));
+
                 }
-                return RedirectToAction(nameof(Index));
+                else if(result is null)
+                {
+                    Message = "Hình ảnh đã tồn tại !";
+                    MessageType = MessageHelper.error;
+                }
+                else 
+                {
+                    Message = "Không upload được hình ảnh !";
+                    MessageType = MessageHelper.error;
+                }
             }
-            Message = "Cập nhật thất bại";
-            MessageType = MessageHelper.error;
+            else
+            {
+                 Message = "Cập nhật thất bại";
+                MessageType = MessageHelper.error;
+            }
+      
             ViewData["CategoryId"] = repository.GetSelectListCategory(product.CategoryId);
             return View(product);
         }
@@ -156,7 +187,6 @@ namespace NET105.Areas.Controllers
             {
                 Message = "Xóa món ăn thành công !";
                 MessageType = MessageHelper.success;
-
                 return RedirectToAction(nameof(Index));
 
             }

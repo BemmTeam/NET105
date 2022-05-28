@@ -3,6 +3,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Http;
 
 namespace NET105.Entities 
 {
@@ -44,6 +45,15 @@ namespace NET105.Entities
         public int CategoryId {get;set;}
         [ForeignKey("CategoryId")]
         public  Category Category {get;set;}
+
+        // notmap
+
+        [NotMapped]
+        [DataType(DataType.Upload)]
+        [Required(ErrorMessage = "Chọn file upload")]
+        [Display(Name = "Hình ảnh")]
+        [CheckFile(Extensions = "jpg,png,gif")]
+        public IFormFile Upload {get;set;}
 
     }
 }

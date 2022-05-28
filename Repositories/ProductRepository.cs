@@ -13,20 +13,31 @@ namespace NET105.Repository
     public class ProductRepository : IProduct
     {
         private readonly ShopContext context;
+        private readonly IUploadHelper uploadHelper;
 
-        public ProductRepository(ShopContext context)
+        public ProductRepository(ShopContext context, IUploadHelper uploadHelper)
         {
             this.context = context;
+            this.uploadHelper = uploadHelper;
         }
 
-        public async Task<bool> CreateAsync(Product product)
+        public async Task<bool?> CreateAsync(Product product)
         {
             product.ProductId = Guid.NewGuid();
             try
             {
-                await context.AddAsync(product);
-                var result = await context.SaveChangesAsync();
-                return result > 0;
+                 bool? upload = await uploadHelper.UploadFileAsync(product.Upload) ;
+                if (upload is null) return null;
+                else if (upload == true)
+                {
+                    product.ImageUrl = product.Upload.FileName;
+                    await context.Products.AddAsync(product);
+                    var result = await context.SaveChangesAsync();
+                    return result > 0;
+
+                }
+
+                return false;
 
             }
             catch
@@ -41,8 +52,8 @@ namespace NET105.Repository
             try
             {
                 var product = await FindProductAsync(id);
-                Console.WriteLine("Product is null ? : "  + product==null );
                 context.Products.Remove(product);
+                uploadHelper.DeleteFile(product.ImageUrl);
                 await context.SaveChangesAsync();
                 return true;
             }
@@ -52,15 +63,27 @@ namespace NET105.Repository
             }
         }
 
-        public async Task<bool> EditAsync(Guid id, Product product)
+        public async Task<bool?> EditAsync(Guid id, Product product)
         {
-           
+              
+
             try
             {
-                context.Update(product);
-                var result =  await context.SaveChangesAsync();
-                
-                return true;
+                bool? upload = await uploadHelper.UploadFileAsync(product.Upload) ;
+                if (upload is null) return null;
+                else if (upload == true)
+                {   
+                    // xóa file cũ đi 
+                    uploadHelper.DeleteFile(product.ImageUrl);
+                    // cập nhật url file mới
+                    product.ImageUrl = product.Upload.FileName;
+                    context.Update(product);
+                    var result = await context.SaveChangesAsync();
+
+                    return true;
+                }
+
+                return false;
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -104,8 +127,8 @@ namespace NET105.Repository
 
         public SelectList GetSelectListCategory(int CategoryId = 0)
         {
-            if(CategoryId == 0) 
-            return new SelectList(context.Categories, "CategoryId", "Name");
+            if (CategoryId == 0)
+                return new SelectList(context.Categories, "CategoryId", "Name");
 
             return new SelectList(context.Categories, "CategoryId", "Name", CategoryId);
         }
