@@ -22,5 +22,9 @@ namespace NET105.Interface
   
         public SelectList GetSelectListCategory(int CategoryId); 
 
+        public IQueryable<Product> GetProductsWithIdCgr(int idCategory);
+        public IQueryable<Product> ProductOder( IQueryable<Product> products , int? type) ;
+ 
+
     }
 }

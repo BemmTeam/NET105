@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NET105.Entities;
+using NET105.Helper;
 
 namespace NET105.Repository
 {
@@ -11,18 +12,30 @@ namespace NET105.Repository
     {
         private readonly ShopContext context;
 
-        public CategoryRepository(ShopContext context)
+        private readonly Interface.IUploadHelper uploadHelper;
+
+        public CategoryRepository(ShopContext context, Interface.IUploadHelper uploadHelper)
         {
             this.context = context;
+            this.uploadHelper = uploadHelper;
         }
 
-        public async Task<bool> CreateAsync(Category category)
+        public async Task<bool?> CreateAsync(Category category)
         {
-             try
+            try
             {
-                await context.Categories.AddAsync(category);
-                var result = await context.SaveChangesAsync();
-                return result > 0;
+                bool? upload = await uploadHelper.UploadFileAsync(category.Upload);
+                if (upload is null) return null;
+                else if (upload == true)
+                {
+                    category.ImageUrl = category.Upload.FileName;
+                    await context.Categories.AddAsync(category);
+                    var result = await context.SaveChangesAsync();
+                    return result > 0;
+
+                }
+
+                return false;
 
             }
             catch
@@ -38,6 +51,7 @@ namespace NET105.Repository
             {
                 var category = await FindCategoryAsync(id);
                 context.Categories.Remove(category);
+                uploadHelper.DeleteFile(category.ImageUrl);
                 await context.SaveChangesAsync();
                 return true;
             }
@@ -47,14 +61,29 @@ namespace NET105.Repository
             }
         }
 
-        public async Task<bool> EditAsync(int id, Category category)
+        public async Task<bool?> EditAsync(int id, Category category , bool update)
         {
-              try
+                try
             {
+                if (update)
+                {
+                    bool? upload = await uploadHelper.UploadFileAsync(category.Upload);
+                    if (upload is null) return null;
+                    else if (upload == true)
+                    {
+                        // xóa file cũ đi 
+                        uploadHelper.DeleteFile(category.ImageUrl);
+                        // cập nhật url file mới
+                        category.ImageUrl = category.Upload.FileName;
+
+                    }
+                }
+
                 context.Categories.Update(category);
-                var result =  await context.SaveChangesAsync();
-                
+                var result = await context.SaveChangesAsync();
                 return true;
+
+  
             }
             catch (DbUpdateConcurrencyException)
             {

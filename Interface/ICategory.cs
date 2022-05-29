@@ -12,11 +12,11 @@ namespace NET105.Interface
  
         public Task<Category> GetCategoryAsync(int? id);
 
-        public Task<bool> EditAsync(int id , Category category);
+        public Task<bool?> EditAsync(int id , Category category, bool update);
 
         public  Task<bool> DeleteAsync(int id);
 
-        public Task<bool> CreateAsync(Category category);
+        public Task<bool?> CreateAsync(Category category);
 
         public Task<Category> FindCategoryAsync(int? id);
   

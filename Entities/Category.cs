@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Http;
 
 namespace NET105.Entities 
 {
@@ -25,5 +26,15 @@ namespace NET105.Entities
         public string ImageUrl {get;set;}
 
         public  ICollection<Product> Products {get;set;}
+        
+
+        // notmap
+
+        [NotMapped]
+        [DataType(DataType.Upload)]
+        [Display(Name = "Hình ảnh")]
+        [CheckFile(Extensions = "jpg,png,gif")]
+        public IFormFile Upload {get;set;}
+
     }
 }

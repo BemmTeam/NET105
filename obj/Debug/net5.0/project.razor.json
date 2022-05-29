@@ -11400,6 +11400,74 @@
         }
       },
       {
+        "HashCode": -922836557,
+        "Kind": "ITagHelper",
+        "Name": "NET105.Helper.PagedSizeTagHelper",
+        "AssemblyName": "NET105",
+        "CaseSensitive": false,
+        "TagMatchingRules": [
+          {
+            "TagName": "PagedSize"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "ITagHelper",
+            "Name": "value",
+            "TypeName": "System.Int32?",
+            "Metadata": {
+              "Common.PropertyName": "Value"
+            }
+          },
+          {
+            "Kind": "ITagHelper",
+            "Name": "model",
+            "TypeName": "NET105.Models.PagedListModel",
+            "Metadata": {
+              "Common.PropertyName": "model"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "ITagHelper",
+          "Common.TypeName": "NET105.Helper.PagedSizeTagHelper"
+        }
+      },
+      {
+        "HashCode": -385405823,
+        "Kind": "ITagHelper",
+        "Name": "NET105.Helper.PagedOrderByTagHelper",
+        "AssemblyName": "NET105",
+        "CaseSensitive": false,
+        "TagMatchingRules": [
+          {
+            "TagName": "PagedOrderBy"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "ITagHelper",
+            "Name": "value",
+            "TypeName": "System.Int32?",
+            "Metadata": {
+              "Common.PropertyName": "Value"
+            }
+          },
+          {
+            "Kind": "ITagHelper",
+            "Name": "model",
+            "TypeName": "NET105.Models.PagedListModel",
+            "Metadata": {
+              "Common.PropertyName": "model"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "ITagHelper",
+          "Common.TypeName": "NET105.Helper.PagedOrderByTagHelper"
+        }
+      },
+      {
         "HashCode": -878118525,
         "Kind": "ITagHelper",
         "Name": "Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper",
@@ -15694,6 +15762,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "d:\\Study\\NET105\\ASM\\NET105\\Views\\Shared\\_CategoryPartial.cshtml",
+      "TargetPath": "Views\\Shared\\_CategoryPartial.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "d:\\Study\\NET105\\ASM\\NET105\\Areas\\Manager\\Views\\Product\\Index.cshtml",
       "TargetPath": "Areas\\Manager\\Views\\Product\\Index.cshtml",
       "FileKind": "mvc"
@@ -15711,6 +15784,11 @@
     {
       "FilePath": "d:\\Study\\NET105\\ASM\\NET105\\Areas\\Manager\\Views\\User\\Details.cshtml",
       "TargetPath": "Areas\\Manager\\Views\\User\\Details.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "d:\\Study\\NET105\\ASM\\NET105\\Views\\Product\\Index.cshtml",
+      "TargetPath": "Views\\Product\\Index.cshtml",
       "FileKind": "mvc"
     },
     {

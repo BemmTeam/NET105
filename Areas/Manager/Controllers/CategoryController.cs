@@ -72,11 +72,11 @@ namespace NET105.Areas.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CategoryId,Name,Desc,ImageUrl")] Category category)
+        public async Task<IActionResult> Create([Bind("CategoryId,Name,Desc,ImageUrl,Upload")] Category category)
         {
             if (ModelState.IsValid)
             {
-                if(await repository.CreateAsync(category))
+                if(await repository.CreateAsync(category) == true)
                 {
                     Message = "Thêm danh mục thành công !";
                     MessageType = MessageHelper.success;
@@ -107,7 +107,7 @@ namespace NET105.Areas.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CategoryId,Name,Desc,ImageUrl")] Category category)
+        public async Task<IActionResult> Edit(int id, [Bind("CategoryId,Name,Desc,ImageUrl,Upload")] Category category)
         {
              if (id != category.CategoryId)
             {
@@ -116,8 +116,8 @@ namespace NET105.Areas.Controllers
 
             if (ModelState.IsValid)
             {
-               
-                if(await repository.EditAsync(id , category))
+               Console.WriteLine(category.Desc);
+                if(await repository.EditAsync(id , category , category.Upload != null) == true)
                 {
                     Message = "Cập nhật danh mục thành công !";
                     MessageType = MessageHelper.success;

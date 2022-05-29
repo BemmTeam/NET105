@@ -17,7 +17,7 @@ namespace NET105.Helper
 
         public void DeleteFile(string fileName)
         {
-            var filePath = Path.Combine(environment.WebRootPath, "Images", "Products", fileName);
+            var filePath = Path.Combine(environment.WebRootPath, "Images", "Products", fileName??="null");
             if (File.Exists(filePath))
             {
                File.Delete(filePath);

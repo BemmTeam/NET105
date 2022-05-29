@@ -4,7 +4,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using NET105.Entities;
 using NET105.Interface;
 using NET105.Models;
 
@@ -16,18 +18,33 @@ namespace NET105.Controllers
 
         private readonly IProduct productScv ;
 
-        public HomeController(ILogger<HomeController> logger, IProduct _productScv)
+        private readonly ICategory categoryScv ;
+
+        public HomeController(ILogger<HomeController> logger, IProduct productScv, ICategory categoryScv)
         {
-            
             _logger = logger;
-            productScv = _productScv;
+            this.productScv = productScv;
+            this.categoryScv = categoryScv;
         }
 
         public IActionResult Index()
         {
-            var products = productScv.GetProductsAsync();
-            products = products.OrderBy(p => p.Price).Take(8);
-            return View(products.AsEnumerable());
+
+            var categories = categoryScv.GetCategories();
+            var listCategories = categories.Include(m => m.Products).AsEnumerable();
+            ViewData["listCategories"] = listCategories;
+            IDictionary<string , IEnumerable<Product>> productCtgs = new Dictionary<string , IEnumerable<Product>>() ;
+
+            ViewData["ProductPrice"] = productScv.GetProductsAsync().OrderByDescending(x => x.Price).Take(9);
+            foreach(var item in listCategories)
+            {
+                productCtgs.Add(item.Name , item.Products);
+            }
+
+            
+
+
+            return View(productCtgs);
         }
 
         public IActionResult Privacy()

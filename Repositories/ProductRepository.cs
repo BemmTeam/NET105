@@ -129,12 +129,47 @@ namespace NET105.Repository
             return product;
         }
 
+        public IQueryable<Product> GetProductsWithIdCgr(int idCategory)
+        {
+            var products = context.Products.Where(p => p.CategoryId == idCategory);
+
+            return products;
+        }
+
         public SelectList GetSelectListCategory(int CategoryId = 0)
         {
             if (CategoryId == 0)
                 return new SelectList(context.Categories, "CategoryId", "Name");
 
             return new SelectList(context.Categories, "CategoryId", "Name", CategoryId);
+        }
+
+        public IQueryable<Product> ProductOder(IQueryable<Product> products, int? type)
+        {
+
+            switch(type)
+            {
+
+                case 1 : 
+                products = products.OrderByDescending(x=> x.Price);    
+                break;
+
+                case 2 : 
+                products = products.OrderBy(x=> x.Price);    
+                break;
+
+                
+                case 3 : 
+                products = products.OrderByDescending(x=> x.Name);    
+                break;
+
+                case 4 : 
+                products = products.OrderBy(x=> x.Name);    
+                break;
+
+            }
+            return products;
+
         }
 
         private bool ProductExists(Guid id)

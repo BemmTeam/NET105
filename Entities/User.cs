@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 namespace NET105.Entities 
 {
 
+ 
     public class User : IdentityUser
     {   
         [Display(Name = "Họ và tên")]
