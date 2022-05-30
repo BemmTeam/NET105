@@ -31,6 +31,8 @@ namespace NET105
             services.AddDbContext<ShopContext>(option => 
             option.UseSqlServer(Configuration.GetConnectionString("Shop")));
 
+            // add session
+            services.AddSession(option => option.IdleTimeout = TimeSpan.FromMinutes(90));
 
             services.AddTransient<IProduct,ProductRepository>();
             services.AddTransient<ICategory,CategoryRepository>();
@@ -43,6 +45,9 @@ namespace NET105
             services.AddScoped<IUploadHelper , UploadHelper>();
 
 
+            // bật cors
+            services.AddCors(c => c.AddPolicy("AllowOrigin" , option => option.AllowAnyOrigin()));
+  services.AddCors(options => options.AddDefaultPolicy(builder => builder.AllowAnyOrigin().WithMethods("PUT", "DELETE", "GET" , "POST").AllowAnyHeader()));
 
         }
 
@@ -61,9 +66,9 @@ namespace NET105
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
-
+            app.UseCors(option => option.AllowAnyOrigin());
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

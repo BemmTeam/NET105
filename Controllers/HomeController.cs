@@ -33,7 +33,7 @@ namespace NET105.Controllers
             var categories = categoryScv.GetCategories();
             var listCategories = categories.Include(m => m.Products).AsEnumerable();
             ViewData["listCategories"] = listCategories;
-            IDictionary<string , IEnumerable<Product>> productCtgs = new Dictionary<string , IEnumerable<Product>>() ;
+            IDictionary<string , IEnumerable<Product>> productCtgs = new Dictionary<string , IEnumerable<Product>>();
 
             ViewData["ProductPrice"] = productScv.GetProductsAsync().OrderByDescending(x => x.Price).Take(9);
             foreach(var item in listCategories)
@@ -47,10 +47,6 @@ namespace NET105.Controllers
             return View(productCtgs);
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

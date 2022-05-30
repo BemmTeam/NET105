@@ -47,6 +47,14 @@ namespace NET105.Controllers
         }
 
        
+        public async Task<IActionResult> ProductDetail(Guid id)
+        {
+
+            var product =await productSvc.GetProductAsync(id);
+
+            return View(product);
+        }
+        
 
 
     }

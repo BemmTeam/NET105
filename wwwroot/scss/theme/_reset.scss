@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,200;0,300;1,200&display=swap');
 body {
 	line-height: 24px;
 	font-size: 14px;
@@ -21,7 +22,7 @@ h3,
 h4,
 h5,
 h6 {
-	font-family: $title-font;
+	font-family: "Be Vietnam Pro", sans-serif ;
 	color: $title-color;
 	font-weight: 500;
 	line-height: 1.2 !important;
