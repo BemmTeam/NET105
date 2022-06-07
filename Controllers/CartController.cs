@@ -24,8 +24,5 @@ namespace NET105.Controllers
             
             return Ok(categories);
         }   
-
-
- 
     }
 }

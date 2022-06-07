@@ -48,6 +48,8 @@ namespace NET105.Areas.Controllers
                 
                 ViewBag.searchString = searchString;
             }
+
+          
             return View (await products.ToPagedListAsync((int)page, 5));
         }
 
@@ -87,11 +89,11 @@ namespace NET105.Areas.Controllers
                     Message = "Thêm món ăn thành công !";
                     MessageType = MessageHelper.success;
 
-                    return RedirectToAction(nameof(Index));
-
+                    return RedirectToAction(nameof(Index),controllerName:"Product");
                 }
                 else if(result is null)
                 {
+
                     Message = "Hình ảnh đã tồn tại !";
                     MessageType = MessageHelper.error;
                   
@@ -192,7 +194,7 @@ namespace NET105.Areas.Controllers
             {
                 Message = "Xóa món ăn thành công !";
                 MessageType = MessageHelper.success;
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index");
 
             }
             Message = "Xóa món ăn không thành công ";

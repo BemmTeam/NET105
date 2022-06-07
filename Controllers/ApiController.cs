@@ -66,7 +66,7 @@ namespace NET105.Controllers
         [HttpPost]
         public async Task<IActionResult> Carts(Guid id , int quantity)
         {
-            Console.WriteLine(id);
+        
             var product = await productSvc.FindProductAsync(id);
             CartDetail cart = null;
             var carts = SessionHelper.GetObjectFormJson<List<CartDetail>>(HttpContext.Session, "carts");
@@ -81,8 +81,6 @@ namespace NET105.Controllers
             else 
             {
                 int index = FindCart(id);
-                Console.WriteLine("id la: " + index);
-                Console.WriteLine(carts.Count);
                 if(index != -1)
                 {
                     cart = new() ;

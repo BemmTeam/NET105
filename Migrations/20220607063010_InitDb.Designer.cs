@@ -10,7 +10,7 @@ using NET105;
 namespace NET105.Migrations
 {
     [DbContext(typeof(ShopContext))]
-    [Migration("20220527080228_InitDb")]
+    [Migration("20220607063010_InitDb")]
     partial class InitDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -163,9 +163,6 @@ namespace NET105.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<string>("CartDetail_Json")
-                        .HasColumnType("text");
-
                     b.Property<DateTime>("Completed")
                         .HasColumnType("datetime2");
 
@@ -188,6 +185,32 @@ namespace NET105.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Carts");
+                });
+
+            modelBuilder.Entity("NET105.Entities.CartDetail", b =>
+                {
+                    b.Property<string>("CartDetailId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<Guid>("CartId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<float>("Price")
+                        .HasColumnType("real");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("CartDetailId");
+
+                    b.HasIndex("CartId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("CartDetails");
                 });
 
             modelBuilder.Entity("NET105.Entities.Category", b =>
@@ -420,6 +443,25 @@ namespace NET105.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("NET105.Entities.CartDetail", b =>
+                {
+                    b.HasOne("NET105.Entities.Cart", "Cart")
+                        .WithMany("CartDetails")
+                        .HasForeignKey("CartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("NET105.Entities.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cart");
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("NET105.Entities.Product", b =>
                 {
                     b.HasOne("NET105.Entities.Category", "Category")
@@ -429,6 +471,11 @@ namespace NET105.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("NET105.Entities.Cart", b =>
+                {
+                    b.Navigation("CartDetails");
                 });
 
             modelBuilder.Entity("NET105.Entities.Category", b =>

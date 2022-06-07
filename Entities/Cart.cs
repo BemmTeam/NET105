@@ -1,5 +1,7 @@
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -43,11 +45,8 @@ namespace NET105.Entities
         [Display(Name = "Trạng thái")]
         public StatusType Status {get;set;}
 
-        [Column(TypeName = "text")]
-        public string CartDetail_Json {get;set;}
-
-        [NotMapped]
-        public CartDetail CartDetail {get;set;}
+        [Display(Name = "Danh sách đơn hàng chi tiết")]
+        public ICollection<CartDetail> CartDetails {get;set;}
 
         // Khóa ngoại
         public string UserId {get;set;}

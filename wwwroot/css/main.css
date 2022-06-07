@@ -5271,7 +5271,7 @@ label {
       padding: 0px 0px 0px 15px;
       border: 1px solid #eeeeee;
       border-right: 0px; }
-    .blog_right_sidebar .newsletter_widget .form-control {
+    .blog_right_sidebar .newsletter_widget .form-control .form-control-search {
       font-size: 12px;
       line-height: 24px;
       color: #cccccc;

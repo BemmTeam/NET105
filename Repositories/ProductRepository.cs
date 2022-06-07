@@ -52,8 +52,8 @@ namespace NET105.Repository
             try
             {
                 var product = await FindProductAsync(id);
-                context.Products.Remove(product);
                 uploadHelper.DeleteFile(product.ImageUrl);
+                context.Products.Remove(product);
                 await context.SaveChangesAsync();
                 return true;
             }

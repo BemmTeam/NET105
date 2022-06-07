@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "c70670bb-8e99-4bda-b21c-b11fc0476c67": {
+      "ProjectGuid": "c70670bb-8e99-4bda-b21c-b11fc0476c67",
+      "DisplayName": "NET105",
+      "ColorIndex": 0
+    },
+    "1a771876-51e7-43c8-a734-d8905d39154a": {
+      "ProjectGuid": "1a771876-51e7-43c8-a734-d8905d39154a",
+      "DisplayName": "NET105",
+      "ColorIndex": 1
+    }
+  },
+  "NextColorIndex": 2
+}

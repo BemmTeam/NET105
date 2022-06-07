@@ -24,7 +24,5 @@ namespace NET105.Interface
 
         public SelectList GetSelectListPayments();
 
- 
-
     }
 }
