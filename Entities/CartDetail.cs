@@ -31,5 +31,9 @@ namespace NET105.Entities
         [Required(ErrorMessage = "{0} là phải chọn")]
         public Product Product {get;set;}
 
+
+        [NotMapped] // tự tính duoc nên không cần map vào
+        public float Total {get;set;}
+
     }
 }

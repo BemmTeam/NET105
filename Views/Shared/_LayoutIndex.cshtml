@@ -19,6 +19,9 @@
 	<!--
 		CSS
 		============================================= -->
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
 	<link rel="stylesheet" href="~/css/linearicons.css">
 	<link rel="stylesheet" href="~/css/font-awesome.min.css">
 	<link rel="stylesheet" href="~/css/themify-icons.css">
@@ -31,11 +34,11 @@
 	<link rel="stylesheet" href="~/css/magnific-popup.css">
 	<link rel="stylesheet" href="~/css/main.css">
 	<link rel="stylesheet" href="~/css/product.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
 </head>
 
-<body ng-app="app" ng-controller="mycontroller">
+<body>
 
 	<!-- Start Header Area -->
 	<header class="header_area sticky-header">
@@ -53,18 +56,10 @@
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
 						<ul class="nav navbar-nav menu_nav ml-auto">
-							<li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li>
-							<li class="nav-item submenu dropdown">
-								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-								 aria-expanded="false">Shop</a>
-								<ul class="dropdown-menu">
-									<li class="nav-item"><a class="nav-link" href="category.html">Shop Category</a></li>
-									<li class="nav-item"><a class="nav-link" href="single-product.html">Product Details</a></li>
-									<li class="nav-item"><a class="nav-link" href="checkout.html">Product Checkout</a></li>
-									<li class="nav-item"><a class="nav-link" href="cart.html">Shopping Cart</a></li>
-									<li class="nav-item"><a class="nav-link" href="confirmation.html">Confirmation</a></li>
-								</ul>
-							</li>
+							<li class="nav-item active"><a class="nav-link" asp-controller="Home" asp-action="Index">Home</a></li>
+							<li class="nav-item "><a class="nav-link" asp-controller="Product" asp-action="Index">Shop</a></li>
+
+						
 							<li class="nav-item submenu dropdown">
 								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
 								 aria-expanded="false">Blog</a>
@@ -87,23 +82,23 @@
 						<ul class="nav navbar-nav navbar-right">
 							<li class="nav-item">
 										<!-- cart -->
-								<div class="header_cart">
+								<div  class="header_cart">
 									<div class="header_cart-wrap">
 										@* <i class="header_cart-icon fas fa-shopping-cart"></i> *@
 										<a href="#" class="cart header_cart-icon"><span class="ti-bag"></span></a>
-										<label class="header_cart-notice" >{{count}}</label>
+										<label id="cartCount" class="header_cart-notice" >0</label>
 										<!-- no cart: header_cart-list--nocart -->
-										<div class="header_cart-list">
+										<div  class="header_cart-list">
 											<img src="./assets/img/nocart.png" alt="" class="header_cart-nocart-img" />
 											<label class="header_cart-nocart-msg">Chưa có sản phẩm</label>
 
 											<h4 class="header_cart-heading">Sản phẩm đã thêm</h4>
-											<ul id="header_cart-list-item" class="header_cart-list-item">
+											<ul id="tblCart" id="header_cart-list-item" class="header_cart-list-item">
 												
 											
 											</ul>
 											<hr>
-											<button class="header_cart-view btn btn-sm primary-btn text-light">Xem giỏ hàng</button>
+											<a asp-controller="Cart" asp-action="Index" class="header_cart-view btn btn-sm primary-btn text-light">Xem giỏ hàng</a>
 										</div>
 									</div>
 								</div>
@@ -214,13 +209,17 @@
 </p>
 			</div>
 		</div>
-	</footer>
-	<!-- End footer Area -->
 
-	<script src="~/js/vendor/jquery-2.2.4.min.js"></script>
+	</footer>
+	
+		<div id="alertMessage"></div>
+		<link rel="stylesheet" href="~/css/alert.css">
+	<!-- End footer Area -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
 	 crossorigin="anonymous"></script>
-	<script src="~/js/vendor/bootstrap.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="~/js/vendor/jquery-2.2.4.min.js"></script>
+	 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="~/js/jquery.ajaxchimp.min.js"></script>
 	<script src="~/js/jquery.nice-select.min.js"></script>
 	<script src="~/js/jquery.sticky.js"></script>
@@ -230,10 +229,13 @@
 	<script src="~/js/owl.carousel.min.js"></script>
 
 	<!--gmaps Js-->
+	<script src="~/js/alert.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
 	<script src="~/js/gmaps.min.js"></script>
 	<script src="~/js/main.js"></script>
 	<script src="~/js/site.js"></script>
+	<script src="~/js/cart.js"></script>
+
 
 </body>
 

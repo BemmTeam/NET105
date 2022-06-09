@@ -39,15 +39,15 @@ namespace NET105
             services.AddTransient<IPayment,PaymentRepository>();
             services.AddTransient<Icart,CartRepository>();
             services.AddTransient<IUser,UserRepository>();
+            services.AddTransient<ICartDetail,CartDetailRepository>();
+
 
 
             // Add helpder
             services.AddScoped<IUploadHelper , UploadHelper>();
 
 
-            // bật cors
-            services.AddCors(c => c.AddPolicy("AllowOrigin" , option => option.AllowAnyOrigin()));
-  services.AddCors(options => options.AddDefaultPolicy(builder => builder.AllowAnyOrigin().WithMethods("PUT", "DELETE", "GET" , "POST").AllowAnyHeader()));
+          
 
         }
 
@@ -68,7 +68,6 @@ namespace NET105
             app.UseStaticFiles();
             app.UseSession();
             app.UseRouting();
-            app.UseCors(option => option.AllowAnyOrigin());
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

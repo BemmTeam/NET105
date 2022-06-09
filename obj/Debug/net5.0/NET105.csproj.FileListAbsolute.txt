@@ -188,3 +188,4 @@ D:\Study\NET105\ASM\NET105\obj\Debug\net5.0\Razor\Views\Product\Index.cshtml.g.c
 D:\Study\NET105\ASM\NET105\obj\Debug\net5.0\Razor\Views\Shared\_CategoryPartial.cshtml.g.cs
 D:\Study\NET105\ASM\NET105\obj\Debug\net5.0\Razor\Views\Product\ProductDetail.cshtml.g.cs
 D:\Study\NET105\ASM\NET105\obj\Debug\net5.0\Razor\Views\Shared\_ListProducts.cshtml.g.cs
+D:\Study\NET105\ASM\NET105\obj\Debug\net5.0\Razor\Views\Cart\Index.cshtml.g.cs

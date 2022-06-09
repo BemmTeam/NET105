@@ -21,7 +21,7 @@ namespace NET105.Controllers
             this.productSvc = productSvc;
         }
 
-        [HttpGet("/Products")]
+        [HttpGet("/Product")]
         public async Task<IActionResult> Index(PagedListModel model)
         {
             model.Page ??= 1;
