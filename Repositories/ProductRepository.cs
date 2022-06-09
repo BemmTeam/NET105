@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NET105.Entities;
-using NET105.Interface;
+using NET105.Interfaces;
 using Z.PagedList;
 
 namespace NET105.Repository

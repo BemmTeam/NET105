@@ -10,7 +10,7 @@ namespace NET105.Controllers
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using NET105.Entities;
-    using NET105.Interface;
+    using NET105.Interfaces;
     using NET105.Models;
 
     [Route("[controller]/[action]")]

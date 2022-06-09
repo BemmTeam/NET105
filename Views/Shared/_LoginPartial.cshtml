@@ -1,0 +1,149 @@
+@using Microsoft.AspNetCore.Identity
+@using NET105.Models
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+<style>
+    .dropdown_item {
+        --primary: #de4b3e;
+        --secondary: #c74237;
+        width: 100%;
+        position: relative;
+        color: white;
+        text-transform: uppercase;
+        font-size: 15px;
+        font-weight: bold;
+        border-radius: 4px;
+    }
+
+    .dropdown__select {
+        border-radius: inherit;
+    }
+
+    .dropdown__list {
+        margin-top: 2.5rem;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        display: none;
+        z-index: 9999;
+        min-width: 200px;
+    }
+
+    .dropdown__list:before {
+        content: "";
+        height: 10rem;
+        position: absolute;
+        left: 0;
+        right: 0;
+        background-color: transparent;
+        transform: translateY(-100%);
+    }
+
+    .dropdown_item:hover .dropdown__list {
+        display: block;
+    }
+
+    .dropdown__select,
+    .dropdown__item {
+        width: 100%;
+        padding: 20px;
+        background-color: var(--primary);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+    }
+
+    .dropdown__item {
+        transition: background-color 0.2s linear;
+    }
+
+    .dropdown__item:first-child {
+        border-radius: 4px 4px 0 0;
+        position: relative;
+    }
+
+    .dropdown__item:first-child:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 2rem;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-bottom: 10px solid var(--primary);
+        transform: translateY(-100%);
+        transition: border-color 0.2s linear;
+    }
+
+    .dropdown__item:first-child:hover:before {
+        border-bottom-color: var(--secondary);
+    }
+
+    .dropdown__item:last-child {
+        border-radius: 0 0 4px 4px;
+    }
+
+    .dropdown__item:hover {
+        background-color: var(--secondary);
+    }
+
+    .dropdown__text {
+        color: white;
+    }
+</style>
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <li style="list-style: none;" class="nav-item">
+        <div class="dropdown_item">
+            <div class="dropdown__select">
+                <span class="dropdown__selected mr-1"> @UserManager.GetUserName(User) </span>
+                <i class="fa fa-caret-down dropdown__caret"></i>
+            </div>
+            <ul class="dropdown__list">
+                @if (User.IsInRole(RoleName.Admin))
+                {
+                    <li>
+                        <a asp-area="Manager" asp-controller="Product"asp-action="Index" class="dropdown__item">
+                            <span class="dropdown__text">Quản lý</span>
+                            <i class="fa fa-plus-circle dropdown__icon dropdown__text"></i>
+                        </a>
+                    </li>       
+                }
+                <li>
+                    <a href="" class="dropdown__item">
+                        <span class="dropdown__text">Thông tin</span>
+                        <i class="fa fa-user dropdown__icon dropdown__text"></i>
+                    </a>
+                </li>   
+                <li>
+                    <a class="dropdown__item" href="">  
+                        <span class="dropdown__text">Lịch sử mua hàng</span>
+                        <i class="fa fa-cog dropdown__icon dropdown__text"></i>
+                    </a>
+                </li>
+                <li>
+                    <a  asp-controller="Account" asp-action="SignOut" class="dropdown__item">
+                        <span class="dropdown__text">Đăng xuất</span>
+                        <i class="fa fa-circle dropdown__icon dropdown__text"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </li>
+
+
+}
+else
+{
+    <li style="list-style: none;" class="nav-item">
+        <a asp-controller="Account" asp-action="SignIn" class="btn btn-outline-warning primary-btn btn-sm  text-light">Đăng
+            nhập</a>
+    </li>
+
+}
+
+</div>

@@ -189,3 +189,13 @@ D:\Study\NET105\ASM\NET105\obj\Debug\net5.0\Razor\Views\Shared\_CategoryPartial.
 D:\Study\NET105\ASM\NET105\obj\Debug\net5.0\Razor\Views\Product\ProductDetail.cshtml.g.cs
 D:\Study\NET105\ASM\NET105\obj\Debug\net5.0\Razor\Views\Shared\_ListProducts.cshtml.g.cs
 D:\Study\NET105\ASM\NET105\obj\Debug\net5.0\Razor\Views\Cart\Index.cshtml.g.cs
+D:\Study\NET105\ASM\NET105\obj\Debug\net5.0\Razor\Views\Account\SignIn.cshtml.g.cs
+D:\Study\NET105\ASM\NET105\obj\Debug\net5.0\Razor\Views\Account\SignUp.cshtml.g.cs
+D:\Study\NET105\ASM\NET105\bin\Debug\net5.0\MailKit.dll
+D:\Study\NET105\ASM\NET105\bin\Debug\net5.0\MimeKit.dll
+D:\Study\NET105\ASM\NET105\bin\Debug\net5.0\BouncyCastle.Crypto.dll
+D:\Study\NET105\ASM\NET105\obj\Debug\net5.0\Razor\Views\Account\notifyEmail.cshtml.g.cs
+D:\Study\NET105\ASM\NET105\obj\Debug\net5.0\Razor\Views\Account\ErrorConfirmEmail.cshtml.g.cs
+D:\Study\NET105\ASM\NET105\obj\Debug\net5.0\Razor\Views\Account\ConfirmEmail.cshtml.g.cs
+D:\Study\NET105\ASM\NET105\obj\Debug\net5.0\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
+D:\Study\NET105\ASM\NET105\obj\Debug\net5.0\Razor\Views\Account\AccessDenied.cshtml.g.cs

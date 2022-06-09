@@ -8,7 +8,7 @@ using NET105.Entities;
 
 namespace NET105.Repository
 {
-    public class UserRepository : Interface.IUser
+    public class UserRepository : Interfaces.IUser
     {
         private readonly ShopContext context;
 

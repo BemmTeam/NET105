@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using NET105.Entities;
-using NET105.Interface;
+using NET105.Interfaces;
 using NET105.Models;
 
 namespace NET105.Repository
 {
-    public class CartDetailRepository : Interface.ICartDetail
+    public class CartDetailRepository : Interfaces.ICartDetail
     {
         private readonly IProduct productSvc ;
 

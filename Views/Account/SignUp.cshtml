@@ -1,0 +1,84 @@
+@{
+    ViewData["Title"] = "Đăng ký";
+}
+
+@model SignUpModel
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Login/Register</h1>
+                <nav class="d-flex align-items-center">
+                    <a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
+                    <a href="category.html">Login/Register</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Banner Area -->
+
+<!--================Login Box Area =================-->
+<section class="login_box_area section_gap">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="login_box_img">
+                    <img class="img-fluid" src="~/img/login.jpg" alt="">
+                    <div class="hover">
+                        <h4>Bemm Food</h4>
+                        <p>Trang web đặt món ăn uy tiến nhất Việt Nam. Bạn đã có tài khoản ?</p>
+                        <a class="primary-btn" href="registration.html">Đăng nhập</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div style="padding-top: 20px;" class="login_form_inner">
+                    <h3>Đăng ký</h3>
+                    <form class="row login_form" asp-action="SignUp" method="post" novalidate="novalidate">
+                        <div class="col-md-12 form-group">
+                            <input type="text" class="form-control" asp-for="FullName" placeholder="Họ và tên"
+                                onfocus="this.placeholder = ''" onblur="this.placeholder = 'Họ và tên'">
+                            <span asp-validation-for="FullName" class="badge bg-danger text-light col-12"></span>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <input type="text" class="form-control" asp-for="UserName" placeholder="Tên đăng nhập"
+                                onfocus="this.placeholder = ''" onblur="this.placeholder = 'Tên đăng nhập'">
+                            <span asp-validation-for="UserName" class="badge bg-danger text-light col-12"></span>
+                        </div>
+
+                        <div class="col-md-12 form-group">
+                            <input type="text" class="form-control" asp-for="Address" placeholder="Địa chỉ"
+                                onfocus="this.placeholder = ''" onblur="this.placeholder = 'Địa chỉ'">
+                            <span asp-validation-for="Address" class="badge bg-danger text-light col-12"></span>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <input type="text" class="form-control" asp-for="Email" placeholder="Email"
+                                onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'">
+                            <span asp-validation-for="Email" class="badge bg-danger text-light col-12"></span>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <input type="password" class="form-control" asp-for="Password" placeholder="Mật khẩu"
+                                onfocus="this.placeholder = ''" onblur="this.placeholder = 'Mật khẩu'">
+                            <span asp-validation-for="Password" class="badge bg-danger text-light col-12"></span>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <input type="password" class="form-control" asp-for="ConfirmPassword" placeholder="Mật khẩu"
+                                onfocus="this.placeholder = ''" onblur="this.placeholder = 'Mật khẩu'">
+                            <span asp-validation-for="ConfirmPassword" class="badge bg-danger text-light col-12"></span>
+                        </div>
+
+                        <div class="col-md-12 form-group">
+                            <button type="submit" value="submit" class="primary-btn">Đăng ký</button>
+                            <a href="#">Quên mật khẩu?</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Login Box Area =================-->
+
+

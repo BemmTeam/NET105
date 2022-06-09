@@ -9,10 +9,10 @@ namespace NET105.Areas.MockData
     {
         private List<Category> categories = new()
         {
-            new Category() {Name = "Đồ ăn"},
-            new Category() {Name = "Đồ uống"},
-            new Category() {Name = "Đồ chay"},
-            new Category() {Name = "Tráng miệng"},
+            new Category() {Name = "Đồ ăn" , ImageUrl="doan.png" },
+            new Category() {Name = "Đồ uống", ImageUrl ="douong.png"},
+            new Category() {Name = "Đồ chay", ImageUrl ="rau.png"},
+            new Category() {Name = "Tráng miệng" ,ImageUrl="banh.png"},
 
         };
 

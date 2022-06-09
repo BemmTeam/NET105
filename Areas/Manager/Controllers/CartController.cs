@@ -8,13 +8,16 @@ using Microsoft.EntityFrameworkCore;
 using NET105;
 using NET105.Entities;
 using NET105.Helper;
-using NET105.Interface;
+using NET105.Interfaces;
 using Z.PagedList;
+using Microsoft.AspNetCore.Authorization;
+using NET105.Models;
 
 namespace NET105.Areas.Controllers
 {
     [Area("Manager")]
     [Route("Manager/[controller]/[action]/{id?}")]
+    [Authorize(Roles = RoleName.Admin)]
     public class CartController : Controller
     {
         private readonly Icart repository;

@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 
-namespace NET105.Interface
+namespace NET105.Interfaces
 
 {
     public interface IUploadHelper 

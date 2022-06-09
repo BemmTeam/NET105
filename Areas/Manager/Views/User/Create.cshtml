@@ -13,7 +13,7 @@
         <div class="white-box row">
 
             <div class="col-lg-4 col-xlg-3 col-md-12">
-               
+
             </div>
             <!-- Column -->
             <!-- Column -->
@@ -40,50 +40,38 @@
                             </div>
 
 
-                               <div class="form-group mb-4">
+                            <div class="form-group mb-4">
                                 <label class="col-md-12 p-0">@Html.DisplayNameFor(item => item.Address)</label>
                                 <div class="col-md-12 border-bottom p-0">
                                     <input asp-for="Address" type="text" class="form-control p-0 border-0">
                                 </div>
                                 <span class="badge bg-danger text-light" asp-validation-for="Address"></span>
                             </div>
-                               <div class="form-group mb-4">
-                                <label class="col-md-12 p-0">@Html.DisplayNameFor(item => item.City)</label>
-                                <div class="col-md-12 border-bottom p-0">
-                                    <input asp-for="City" type="text" class="form-control p-0 border-0">
-                                </div>
-                                <span class="badge bg-danger text-light" asp-validation-for="City"></span>
-                            </div>
-                               <div class="form-group mb-4">
-                                <label class="col-md-12 p-0">@Html.DisplayNameFor(item => item.District)</label>
-                                <div class="col-md-12 border-bottom p-0">
-                                    <input asp-for="District" type="text" class="form-control p-0 border-0">
-                                </div>
-                                <span class="badge bg-danger text-light" asp-validation-for="District"></span>
-                            </div>
-                                <div class="form-group mb-4">
+                          
+                            <div class="form-group mb-4">
                                 <label class="col-md-12 p-0">@Html.DisplayNameFor(item => item.PhoneNumber)</label>
                                 <div class="col-md-12 border-bottom p-0">
                                     <input asp-for="PhoneNumber" class="form-control p-0 border-0">
                                 </div>
                                 <span class="badge bg-danger text-light" asp-validation-for="PhoneNumber"></span>
                             </div>
-                               <div class="form-group mb-4">
+                            <div class="form-group mb-4">
                                 <label class="col-md-12 p-0">@Html.DisplayNameFor(item => item.Email)</label>
                                 <div class="col-md-12 border-bottom p-0">
-                                    <input asp-for="Email"  class="form-control p-0 border-0">
+                                    <input asp-for="Email" class="form-control p-0 border-0">
                                 </div>
                                 <span class="badge bg-danger text-light" asp-validation-for="Email"></span>
                             </div>
 
 
-                              <div>
-                                  <div class="form-group mb-4 form-check">
-                                        <label class="col-md-12 p-0">
-                                        <input class="form-check-input p-0 border-0" asp-for="EmailConfirmed" /> @Html.DisplayNameFor(model => model.EmailConfirmed)
-                                        </label>
-                                    </div>
-                              </div>
+                            <div>
+                                <div class="form-group mb-4 form-check">
+                                    <label class="col-md-12 p-0">
+                                        <input class="form-check-input p-0 border-0" asp-for="EmailConfirmed" />
+                                        @Html.DisplayNameFor(model => model.EmailConfirmed)
+                                    </label>
+                                </div>
+                            </div>
 
 
                             <div class="form-group mb-4">
@@ -98,7 +86,8 @@
 
                             <div class="form-group mb-4">
                                 <div class="col-sm-12">
-                                    <button type="submit" class="btn btn-success"><i class="fas fa-plus-circle"></i> Thêm người dùng</button>
+                                    <button type="submit" class="btn btn-success"><i class="fas fa-plus-circle"></i>
+                                        Thêm người dùng</button>
 
                                 </div>
                             </div>

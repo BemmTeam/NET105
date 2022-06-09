@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Http;
 using NET105.Entities;
 using NET105.Models;
 
-namespace NET105.Interface
+namespace NET105.Interfaces
 
 {
 

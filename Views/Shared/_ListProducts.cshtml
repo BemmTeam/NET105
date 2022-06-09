@@ -1,5 +1,5 @@
 
-@using NET105.Interface;
+@using NET105.Interfaces;
 @inject IProduct productScv;
 @{
     var products = productScv.GetProductsAsync().OrderByDescending(x => x.Price).Take(9);

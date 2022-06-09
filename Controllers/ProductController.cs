@@ -3,7 +3,7 @@ namespace NET105.Controllers
 {
 
     using Microsoft.AspNetCore.Mvc;
-    using NET105.Interface;
+    using NET105.Interfaces;
     using Z.PagedList;
     using System;
     using System.Linq;

@@ -8,7 +8,7 @@ using NET105.Entities;
 
 namespace NET105.Repository
 {
-    public class PaymentRepository : Interface.IPayment
+    public class PaymentRepository : Interfaces.IPayment
     {
         private readonly ShopContext context;
 

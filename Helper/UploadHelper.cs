@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 namespace NET105.Helper
 {
 
-    public class UploadHelper : Interface.IUploadHelper
+    public class UploadHelper : Interfaces.IUploadHelper
     {
         private readonly IWebHostEnvironment environment;
 

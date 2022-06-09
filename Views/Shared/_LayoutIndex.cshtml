@@ -34,7 +34,9 @@
 	<link rel="stylesheet" href="~/css/magnific-popup.css">
 	<link rel="stylesheet" href="~/css/main.css">
 	<link rel="stylesheet" href="~/css/product.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+		integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 </head>
 
@@ -47,8 +49,9 @@
 				<div class="container">
 					<!-- Brand and toggle get grouped for better mobile display -->
 					<a class="navbar-brand logo_h" href="index.html"><img src="img/logo.png" alt=""></a>
-					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-					 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<button class="navbar-toggler" type="button" data-toggle="collapse"
+						data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+						aria-expanded="false" aria-label="Toggle navigation">
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
@@ -56,21 +59,24 @@
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
 						<ul class="nav navbar-nav menu_nav ml-auto">
-							<li class="nav-item active"><a class="nav-link" asp-controller="Home" asp-action="Index">Home</a></li>
-							<li class="nav-item "><a class="nav-link" asp-controller="Product" asp-action="Index">Shop</a></li>
+							<li class="nav-item active"><a class="nav-link" asp-controller="Home"
+									asp-action="Index">Home</a></li>
+							<li class="nav-item "><a class="nav-link" asp-controller="Product"
+									asp-action="Index">Shop</a></li>
 
-						
+
 							<li class="nav-item submenu dropdown">
-								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-								 aria-expanded="false">Blog</a>
+								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
+									aria-haspopup="true" aria-expanded="false">Blog</a>
 								<ul class="dropdown-menu">
 									<li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
-									<li class="nav-item"><a class="nav-link" href="single-blog.html">Blog Details</a></li>
+									<li class="nav-item"><a class="nav-link" href="single-blog.html">Blog Details</a>
+									</li>
 								</ul>
 							</li>
 							<li class="nav-item submenu dropdown">
-								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-								 aria-expanded="false">Pages</a>
+								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
+									aria-haspopup="true" aria-expanded="false">Pages</a>
 								<ul class="dropdown-menu">
 									<li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
 									<li class="nav-item"><a class="nav-link" href="tracking.html">Tracking</a></li>
@@ -81,40 +87,40 @@
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
 							<li class="nav-item">
-										<!-- cart -->
-								<div  class="header_cart">
+								<!-- cart -->
+								<div class="header_cart">
 									<div class="header_cart-wrap">
 										@* <i class="header_cart-icon fas fa-shopping-cart"></i> *@
 										<a href="#" class="cart header_cart-icon"><span class="ti-bag"></span></a>
-										<label id="cartCount" class="header_cart-notice" >0</label>
+										<label id="cartCount" class="header_cart-notice">0</label>
 										<!-- no cart: header_cart-list--nocart -->
-										<div  class="header_cart-list">
+										<div class="header_cart-list">
 											<img src="./assets/img/nocart.png" alt="" class="header_cart-nocart-img" />
 											<label class="header_cart-nocart-msg">Chưa có sản phẩm</label>
 
 											<h4 class="header_cart-heading">Sản phẩm đã thêm</h4>
 											<ul id="tblCart" id="header_cart-list-item" class="header_cart-list-item">
-												
-											
+
+
 											</ul>
 											<hr>
-											<a asp-controller="Cart" asp-action="Index" class="header_cart-view btn btn-sm primary-btn text-light">Xem giỏ hàng</a>
+											<a asp-controller="Cart" asp-action="Index"
+												class="header_cart-view btn btn-sm primary-btn text-light">Xem giỏ
+												hàng</a>
 										</div>
 									</div>
 								</div>
-							</div>
-
-							</li>
-							
-							<li style="list-style: none;" class="nav-item">
-								<a class="btn btn-outline-warning primary-btn btn-sm  text-light">Đăng nhập</a>
-							</li>
-				
-							
-						</ul>
 					</div>
+
+					</li>
+
+					@await Html.PartialAsync("_LoginPartial")
+
+
+					</ul>
 				</div>
-			</nav>
+		</div>
+		</nav>
 		</div>
 		<div class="search_input" id="search_input_box">
 			<div class="container">
@@ -128,9 +134,9 @@
 	</header>
 	<!-- End Header Area -->
 
-    <div>
-        @RenderBody()
-    </div>
+	<div>
+		@RenderBody()
+	</div>
 
 	<!-- start footer Area -->
 	<footer class="footer-area section_gap">
@@ -140,7 +146,8 @@
 					<div class="single-footer-widget">
 						<h6>About Us</h6>
 						<p>
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore dolore
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
+							ut labore dolore
 							magna aliqua.
 						</p>
 					</div>
@@ -151,18 +158,20 @@
 						<p>Stay update with our latest</p>
 						<div class="" id="mc_embed_signup">
 
-							<form target="_blank" novalidate="true" 
-							 method="get" class="form-inline">
+							<form target="_blank" novalidate="true" method="get" class="form-inline">
 
 								<div class="d-flex flex-row">
 
-									<input class="form-control" name="EMAIL" placeholder="Enter Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '"
-									 required="" type="email">
+									<input class="form-control" name="EMAIL" placeholder="Enter Email"
+										onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '"
+										required="" type="email">
 
 
-									<button class="click-btn btn btn-default"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></button>
+									<button class="click-btn btn btn-default"><i class="fa fa-long-arrow-right"
+											aria-hidden="true"></i></button>
 									<div style="position: absolute; left: -5000px;">
-										<input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text">
+										<input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value=""
+											type="text">
 									</div>
 
 									<!-- <div class="col-lg-4 col-md-4">
@@ -203,23 +212,34 @@
 				</div>
 			</div>
 			<div class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
-				<p class="footer-text m-0"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-				Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-</p>
+				<p class="footer-text m-0">
+					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+					Copyright &copy;
+					<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is
+					made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com"
+						target="_blank">Colorlib</a>
+					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+				</p>
 			</div>
 		</div>
 
 	</footer>
-	
-		<div id="alertMessage"></div>
-		<link rel="stylesheet" href="~/css/alert.css">
-	<!-- End footer Area -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
-	 crossorigin="anonymous"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+
+	<div id="alertMessage"></div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
 	<script src="~/js/vendor/jquery-2.2.4.min.js"></script>
-	 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/vendor/popper.js"></script>
+
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+
+	<link rel="stylesheet" href="~/css/alert.css">
+	<!-- End footer Area -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+		integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+		crossorigin="anonymous"></script>
+
+
 	<script src="~/js/jquery.ajaxchimp.min.js"></script>
 	<script src="~/js/jquery.nice-select.min.js"></script>
 	<script src="~/js/jquery.sticky.js"></script>
@@ -235,6 +255,7 @@
 	<script src="~/js/main.js"></script>
 	<script src="~/js/site.js"></script>
 	<script src="~/js/cart.js"></script>
+	@await RenderSectionAsync("Scripts", required: false)
 
 
 </body>

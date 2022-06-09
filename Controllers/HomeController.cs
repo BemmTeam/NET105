@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using NET105.Entities;
-using NET105.Interface;
+using NET105.Interfaces;
 using NET105.Models;
 
 namespace NET105.Controllers

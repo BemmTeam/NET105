@@ -2,19 +2,23 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NET105;
 using NET105.Entities;
 using NET105.Helper;
-using NET105.Interface;
+using NET105.Interfaces;
+using NET105.Models;
 using Z.PagedList;
 
 namespace NET105.Areas.Controllers
 {
     [Area("Manager")]
     [Route("Manager/[controller]/[action]/{id?}")]
+    [Authorize(Roles = RoleName.Admin)]
+
     public class PaymentController : Controller
     {
         private readonly IPayment repository;

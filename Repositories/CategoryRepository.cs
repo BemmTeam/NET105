@@ -8,13 +8,13 @@ using NET105.Helper;
 
 namespace NET105.Repository
 {
-    public class CategoryRepository : Interface.ICategory
+    public class CategoryRepository : Interfaces.ICategory
     {
         private readonly ShopContext context;
 
-        private readonly Interface.IUploadHelper uploadHelper;
+        private readonly Interfaces.IUploadHelper uploadHelper;
 
-        public CategoryRepository(ShopContext context, Interface.IUploadHelper uploadHelper)
+        public CategoryRepository(ShopContext context, Interfaces.IUploadHelper uploadHelper)
         {
             this.context = context;
             this.uploadHelper = uploadHelper;

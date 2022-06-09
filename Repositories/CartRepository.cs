@@ -8,7 +8,7 @@ using NET105.Entities;
 
 namespace NET105.Repository
 {
-    public class CartRepository : Interface.Icart
+    public class CartRepository : Interfaces.Icart
     {
         private readonly ShopContext context;
 
