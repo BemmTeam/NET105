@@ -8,8 +8,6 @@ namespace NET105
     {
         public DbSet<Product> Products {get;set;}
 
-        public DbSet<Payment> Payments {get;set;}
-
         public DbSet<Category> Categories {get;set;}
 
         public DbSet<Cart> Carts {get;set;}

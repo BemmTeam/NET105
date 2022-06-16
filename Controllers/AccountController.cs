@@ -7,6 +7,7 @@ namespace NET105.Controllers
     using NET105.Models;
     using System.Threading.Tasks;
     using NET105.Helper;
+    using NET105.Entities;
 
     [Route("[controller]/[action]")]
 
@@ -14,15 +15,21 @@ namespace NET105.Controllers
     {
         private readonly IAccount accountSvc;
 
+        private readonly IUser userSvc;
+
+        public AccountController(IAccount accountSvc, IUser userSvc)
+        {
+            this.accountSvc = accountSvc;
+            this.userSvc = userSvc;
+
+        }
+
         [TempData]
         public string Message { get; set; }
 
         [TempData]
         public string MessageType { get; set; }
-        public AccountController(IAccount accountSvc)
-        {
-            this.accountSvc = accountSvc;
-        }
+
 
         public IActionResult Index()
         {
@@ -59,8 +66,8 @@ namespace NET105.Controllers
                 }
                 else
                 {
-                    Message = "Tên đăng nhập hoặc mật khẩu không đúng";
-                    MessageType = MessageHelper.error;
+                    ViewData["Message"] = "Tên đăng nhập hoặc mật khẩu không đúng";
+                    ViewData["MessageType"] = MessageHelper.error;
                     return View(model);
                 }
             }
@@ -129,7 +136,64 @@ namespace NET105.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        
+
+        public async Task<IActionResult> InfoUser()
+        {
+            var user = await accountSvc.GetUserAsync(User);
+            return View(user);
+        }
+
+
+        public async Task<IActionResult> UpdateUserAsync()
+        {
+            var user = await accountSvc.GetUserAsync(User);
+            return View(user);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateUser(string id, User user)
+        {
+            await accountSvc.UpdateUserAsync(id, user);
+            ViewData["Message"] = "Cập nhật thông tin thành công";
+            ViewData["MessageType"] = MessageHelper.success;
+            return View(user);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ChangePassword()
+        {
+            var user = await accountSvc.GetUserAsync(User);
+            ChangePassword changePassword = new()
+            {
+                UserId = user.Id,
+                Email = user.Email
+            };
+            return View(changePassword);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(ChangePassword model)
+        {
+            System.Console.WriteLine(model.Email);
+            if (ModelState.IsValid)
+            {
+                if (await accountSvc.CheckPassword(model.Password))
+                {
+                    await accountSvc.ChangePassword(model);
+                    ViewData["Message"] = "Đổi mật khẩu thành công";
+                    ViewData["MessageType"] = MessageHelper.success;
+                    return View(model);
+
+                }
+                ViewData["Message"] = "Mật khẩu không đúng";
+                ViewData["MessageType"] = MessageHelper.error;
+                return View(model);
+            }
+            return View(model);
+        }
+
 
     }
 }

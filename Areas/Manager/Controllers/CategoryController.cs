@@ -21,35 +21,35 @@ namespace NET105.Areas.Controllers
 
     public class CategoryController : Controller
     {
-       
+
         private readonly ICategory repository;
 
         public CategoryController(ICategory repository)
         {
             this.repository = repository;
-          
+
         }
 
         [TempData]
-        public string Message {get;set;}
+        public string Message { get; set; }
 
         [TempData]
-        public string MessageType {get;set;}
+        public string MessageType { get; set; }
 
         // GET: Category
-        public async Task<IActionResult> Index(int? page , string searchString)
+        public async Task<IActionResult> Index(int? page, string searchString)
         {
-            page??= 1;
-        
-            IQueryable<Category> categories =  repository.GetCategories();
+            page ??= 1;
 
-            if(!string.IsNullOrEmpty(searchString)) 
+            IQueryable<Category> categories = repository.GetCategories();
+
+            if (!string.IsNullOrEmpty(searchString))
             {
                 categories = categories.Where(category => category.Name.ToLower().Contains(searchString.ToLower()));
-                
+
                 ViewBag.searchString = searchString;
             }
-            return View (await categories.ToPagedListAsync((int)page, 5));
+            return View(await categories.ToPagedListAsync((int)page, 5));
         }
 
         // GET: Category/Details/5
@@ -80,7 +80,7 @@ namespace NET105.Areas.Controllers
         {
             if (ModelState.IsValid)
             {
-                if(await repository.CreateAsync(category) == true)
+                if (await repository.CreateAsync(category) == true)
                 {
                     Message = "Thêm danh mục thành công !";
                     MessageType = MessageHelper.success;
@@ -89,20 +89,22 @@ namespace NET105.Areas.Controllers
 
                 }
             }
-            Message = "Thêm danh mục không thành công !";
-            MessageType = MessageHelper.error;
+
+            ViewData["Message"] = "Thêm danh mục không thành công !";
+            ViewData["MessageType"] = MessageHelper.error;
+
             return View(category);
         }
 
         // GET: Category/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-             var category = await repository.FindCategoryAsync(id);
+            var category = await repository.FindCategoryAsync(id);
             if (category == null)
             {
                 return NotFound();
             }
-          
+
             return View(category);
         }
 
@@ -113,24 +115,25 @@ namespace NET105.Areas.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("CategoryId,Name,Desc,ImageUrl,Upload")] Category category)
         {
-             if (id != category.CategoryId)
+            if (id != category.CategoryId)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
-               Console.WriteLine(category.Desc);
-                if(await repository.EditAsync(id , category , category.Upload != null) == true)
+                Console.WriteLine(category.Desc);
+                if (await repository.EditAsync(id, category, category.Upload != null) == true)
                 {
                     Message = "Cập nhật danh mục thành công !";
                     MessageType = MessageHelper.success;
                 }
                 return RedirectToAction(nameof(Index));
             }
-            Message = "Cập nhật danh mục thất bại";
-            MessageType = MessageHelper.error;
-        
+
+
+            ViewData["Message"] = "Cập nhật danh mục thất bại !";
+            ViewData["MessageType"] = MessageHelper.error;
             return View(category);
         }
 
@@ -151,7 +154,7 @@ namespace NET105.Areas.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-              if(await repository.DeleteAsync(id))
+            if (await repository.DeleteAsync(id))
             {
                 Message = "Xóa danh mục thành công !";
                 MessageType = MessageHelper.success;
@@ -159,11 +162,13 @@ namespace NET105.Areas.Controllers
                 return RedirectToAction(nameof(Index));
 
             }
-            Message = "Xóa danh mục  không thành công ";
-            MessageType = MessageHelper.error;
+
+            ViewData["Message"] = "Xóa danh mục  không thành công  !";
+            ViewData["MessageType"] = MessageHelper.error;
+            
             return View();
         }
 
-       
+
     }
 }

@@ -36,7 +36,7 @@ function InsertList(data) {
                ` + v.product.name + `
                 </h4>
                 <div class="header_cart-item-price-wrap">
-                    <label class="header_cart-item-price">` + v.price + ` VNĐ</label>
+                    <label class="header_cart-item-price">` + v.product.price + ` VNĐ</label>
                     <label class="header_cart-item-multiply">X</label>
                     <label class="header_cart-item-qnt">` + v.quantity +`</label>
                 </div>
@@ -61,6 +61,12 @@ function Event() {
     $(document).on("click", ".btnAddCart", function () {
         var _id = $(this).data("id");
         var _Quantity = $("#sst").val();
+        var qnt = $("#qnt-" + _id).text();
+        // if(qnt <= 0)
+        // {
+        //     ShowAlert("Món đã hết hàng vui lòng chọn món khác", false);
+        //     return;
+        // }
         if(_Quantity == null) _Quantity = 1;
 
         $.ajax({
@@ -74,6 +80,7 @@ function Event() {
             success: function (response) {
                 if(response.isSuccess)
                 {
+                    $("#qnt-" + _id).text(qnt - _Quantity); 
                     LoadList();
                 }
                 ShowAlert(response.message, response.isSuccess);

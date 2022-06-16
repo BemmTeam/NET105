@@ -25,44 +25,44 @@ namespace NET105.Areas.Controllers
     {
         private readonly IProduct repository;
 
-    
-        
-        [TempData]
-        public string Message {get;set;}
+
 
         [TempData]
-        public string MessageType {get;set;}
-        public ProductController(IProduct _repository )
+        public string Message { get; set; }
+
+        [TempData]
+        public string MessageType { get; set; }
+        public ProductController(IProduct _repository)
         {
             repository = _repository;
-         
+
         }
 
         // GET: Product
-        
-        public async Task<IActionResult> Index(int? page , string searchString)
-        {
-            page??= 1;
-        
-            IQueryable<Product> products =  repository.GetProductsAsync();
 
-            if(!string.IsNullOrEmpty(searchString)) 
+        public async Task<IActionResult> Index(int? page, string searchString)
+        {
+            page ??= 1;
+
+            IQueryable<Product> products = repository.GetProductsAsync();
+
+            if (!string.IsNullOrEmpty(searchString))
             {
                 products = products.Where(product => product.Name.ToLower().Contains(searchString.ToLower()));
-                
+
                 ViewBag.searchString = searchString;
             }
 
-          
-            return View (await products.ToPagedListAsync((int)page, 5));
+
+            return View(await products.ToPagedListAsync((int)page, 5));
         }
 
         // GET: Product/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
-            
+
             var product = await repository.GetProductAsync(id);
-            if(product is null)
+            if (product is null)
             {
                 return NotFound();
             }
@@ -88,32 +88,36 @@ namespace NET105.Areas.Controllers
             if (ModelState.IsValid)
             {
                 bool? result = await repository.CreateAsync(product) == true;
-                if(result == true)
+                if (result == true)
                 {
                     Message = "Thêm món ăn thành công !";
                     MessageType = MessageHelper.success;
 
-                    return RedirectToAction(nameof(Index),controllerName:"Product");
+                    return RedirectToAction(nameof(Index), controllerName: "Product");
                 }
-                else if(result is null)
+                else if (result is null)
                 {
 
-                    Message = "Hình ảnh đã tồn tại !";
-                    MessageType = MessageHelper.error;
-                  
+
+                    ViewData["Message"] = "Hình ảnh đã tồn tại !";
+                    ViewData["MessageType"] = MessageHelper.error;
+
                 }
-                else {
-                    
-                    Message = "Không upload được hình ảnh !";
-                    MessageType = MessageHelper.error;
+                else
+                {
+
+                    ViewData["Message"] = "Không upload được hình ảnh !";
+                    ViewData["MessageType"] = MessageHelper.error;
                 }
             }
-            else 
+            else
             {
-                  Message = "Thêm món ăn không thành công !";
-                  MessageType = MessageHelper.error;
+
+
+                ViewData["Message"] = "Thêm món ăn không thành công !";
+                ViewData["MessageType"] = MessageHelper.error;
             }
-          
+
             ViewData["CategoryId"] = repository.GetSelectListCategory(product.CategoryId);
             return View(product);
         }
@@ -137,42 +141,47 @@ namespace NET105.Areas.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, [Bind("ProductId,Name,Quantity,Price,Desc,ImageUrl,Address,CategoryId,Upload")] Product product)
         {
-            
+
             if (id != product.ProductId)
             {
-                
+
 
                 return NotFound();
             }
-            
-        
-            if (  ModelState.IsValid )
+
+
+            if (ModelState.IsValid)
             {
-                bool? result = await repository.EditAsync(id , product , product.Upload != null);
-                if(result == true)
+                bool? result = await repository.EditAsync(id, product, product.Upload != null);
+                if (result == true)
                 {
                     Message = "Cập nhật thành công !";
                     MessageType = MessageHelper.success;
                     return RedirectToAction(nameof(Index));
 
                 }
-                else if(result is null)
+                else if (result is null)
                 {
-                    Message = "Hình ảnh đã tồn tại !";
-                    MessageType = MessageHelper.error;
+
+
+                    ViewData["Message"] = "Hình ảnh đã tồn tại !";
+                    ViewData["MessageType"] = MessageHelper.error;
                 }
-                else 
+                else
                 {
-                    Message = "Không upload được hình ảnh !";
-                    MessageType = MessageHelper.error;
+
+                    ViewData["Message"] = "Không upload được hình ảnh !";
+                    ViewData["MessageType"] = MessageHelper.error;
                 }
             }
             else
             {
-                 Message = "Cập nhật thất bại";
-                MessageType = MessageHelper.error;
+
+
+                ViewData["Message"] = "Cập nhật thất bại !";
+                ViewData["MessageType"] = MessageHelper.error;
             }
-      
+
             ViewData["CategoryId"] = repository.GetSelectListCategory(product.CategoryId);
             return View(product);
         }
@@ -194,15 +203,17 @@ namespace NET105.Areas.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            if(await repository.DeleteAsync(id))
+            if (await repository.DeleteAsync(id))
             {
                 Message = "Xóa món ăn thành công !";
                 MessageType = MessageHelper.success;
                 return RedirectToAction("Index");
 
             }
-            Message = "Xóa món ăn không thành công ";
-            MessageType = MessageHelper.error;
+
+            ViewData["Message"] = "Xóa món ăn không thành công !";
+            ViewData["MessageType"] = MessageHelper.error;
+
             return View();
         }
     }

@@ -63,7 +63,6 @@ namespace NET105.Areas.Controllers
         // GET: Cart/Create
         public IActionResult Create()
         {
-            ViewData["PaymentId"] = repository.GetSelectListPayments();
             ViewData["UserId"] = repository.GetSelectListUsers();
             return View();
         }
@@ -86,9 +85,9 @@ namespace NET105.Areas.Controllers
 
                 }
             }
-            Message = "Thêm giỏ hàng không thành công !";
-            MessageType = MessageHelper.error;
-            ViewData["PaymentId"] = repository.GetSelectListPayments();
+
+            ViewData["Message"] = "Thêm giỏ hàng không thành công !";
+            ViewData["MessageType"] = MessageHelper.error;
             ViewData["UserId"] = repository.GetSelectListUsers();
             return View(cart);
         }
@@ -103,7 +102,6 @@ namespace NET105.Areas.Controllers
             {
                 return NotFound();
             }
-            ViewData["PaymentId"] = repository.GetSelectListPayments();
             ViewData["UserId"] = repository.GetSelectListUsers();
             return View(cart);
         }
@@ -130,10 +128,10 @@ namespace NET105.Areas.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            Message = "Cập nhật giỏ hàng thất bại";
-            MessageType = MessageHelper.error;
 
-            ViewData["PaymentId"] = repository.GetSelectListPayments();
+            ViewData["Message"] = "Cập nhật giỏ hàng thất bại !";
+            ViewData["MessageType"] = MessageHelper.error;
+
             ViewData["UserId"] = repository.GetSelectListUsers();
             return View(cart);
         }
@@ -157,7 +155,7 @@ namespace NET105.Areas.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            if(await repository.DeleteAsync(id))
+            if (await repository.DeleteAsync(id))
             {
                 Message = "Xóa giỏ hàng thành công !";
                 MessageType = MessageHelper.success;
@@ -165,9 +163,29 @@ namespace NET105.Areas.Controllers
                 return RedirectToAction(nameof(Index));
 
             }
-            Message = "Xóa giỏ hàng  không thành công ";
-            MessageType = MessageHelper.error;
+
+            ViewData["Message"] = "Xóa giỏ hàng không thành công !";
+            ViewData["MessageType"] = MessageHelper.error;
             return View();
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> UpdateStatus(Guid id, int Status)
+        {
+            if (await repository.UpdateStatusAsync(id, Status))
+            {
+                return Json(new DataJsonResult
+                {
+                    Message = "Cập nhật trạng thái thành công ",
+                    IsSuccess = true
+                });
+            }
+
+            return Json(new DataJsonResult
+            {
+                Message = "Cập nhật trạng thái thất bại ",
+                IsSuccess = false
+            });
         }
 
 

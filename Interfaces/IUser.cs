@@ -18,6 +18,10 @@ namespace NET105.Interfaces
 
         public Task<User> FindUserAsync(string id);
 
+
+        public Task<bool> DeleteAsync(string id);
+
+
         // public  Task<bool> changePassword(string id , string password);
 
  

@@ -21,6 +21,21 @@
 <!--================Cart Area =================-->
 <section class="cart_area">
     <div class="container">
+
+        <h4 for="">Thông tin người nhận</h4>
+        <hr>
+        <div class="col-md-12 form-group p_star">
+            <label for="">Người nhận</label>
+            <input disabled type="text" class="form-control" value="@ViewData["FullName"]"  name="add1">
+        </div>
+        <div class="col-md-12 form-group p_star">
+            <label for="">Địa chỉ nhận</label>
+            <input disabled type="text" class="form-control"  value="@ViewData["Address"]"   name="add1">
+        </div>
+        <div class="col-md-12 form-group p_star">
+            <label for="">Email</label>
+            <input disabled type="text" class="form-control" value="@ViewData["Email"]"   name="add1">
+        </div>
         <div class="cart_inner">
             <div class="table-responsive">
                 <table class="table">
@@ -41,7 +56,8 @@
                                     <td>
                                         <div class="media">
                                             <div class="d-flex">
-                                                <img height="50" width="50" src="~/Images/Products/@item.Product.ImageUrl" alt="">
+                                                <img height="80" width="80" src="~/Images/Products/@item.Product.ImageUrl"
+                                            alt="">
                                             </div>
                                             <div class="media-body">
                                                 <p>@item.Product.Name</p>
@@ -49,58 +65,58 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <h5>@item.Price VNĐ</h5>
+                                        <h5>@item.Product.Price VNĐ</h5>
                                     </td>
                                     <td>
                                         <div class="product_count">
-                                            <input type="text"  name="qty" id="sst" maxlength="@item.Quantity" minlength="1" value="@item.Quantity" title="Quantity:"
-                                        class="input-text qty">
+                                            <input type="text" name="qty" id="@item.CartDetailId" maxlength="@item.Quantity"
+                                        minlength="1" value="@item.Quantity" title="Quantity:" class="input-text qty">
                                             <button
-                                        onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
+                                        onclick="var result = document.getElementById('@item.CartDetailId'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
                                         class="increase items-count" type="button"><i
                                             class="lnr lnr-chevron-up"></i></button>
                                             <button
-                                        onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
+                                        onclick="var result = document.getElementById('@item.CartDetailId'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 1 ) result.value--;return false;"
                                         class="reduced items-count" type="button"><i
                                             class="lnr lnr-chevron-down"></i></button>
                                         </div>
                                     </td>
                                     <td>
-                                        <h5>@item.Total</h5>
+                                        <h5>@item.Price</h5>
                                     </td>
                                 </tr>
                             }
                         }
-                         <tr class="bottom_button">
-                                <td>
-                                    <a class="gray_btn" href="#">Update Cart</a>
-                                </td>
-                                <td>
+                        <tr class="bottom_button">
+                            <td>
+                                <a class="gray_btn" href="#">Update Cart</a>
+                            </td>
+                            <td>
 
-                                </td>
-                                <td>
+                            </td>
+                            <td>
 
-                                </td>
-                                <td>
-                                    <div class="cupon_text d-flex justify-content-end">
-                                        <a class="primary-btn" href="#">Thanh toán</a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
+                            </td>
+                            <td>
+                                <div class="cupon_text d-flex justify-content-end">
+                                    <a class="primary-btn" asp-action="CheckOut">Thanh toán</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
 
-                                </td>
-                                <td>
+                            </td>
+                            <td>
 
-                                </td>
-                                <td>
-                                    <h5>Subtotal</h5>
-                                </td>
-                                <td >
-                                    <h5>@ViewData["Total"]</h5>
-                                </td>
-                            </tr>
+                            </td>
+                            <td>
+                                <h5>Subtotal</h5>
+                            </td>
+                            <td>
+                                <h5>@ViewData["Total"]</h5>
+                            </td>
+                        </tr>
                         @* <tr class="shipping_area">
                             <td>
 

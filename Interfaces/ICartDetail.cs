@@ -15,6 +15,7 @@ namespace NET105.Interfaces
 
         Task<DataJsonResult> AddCartAsync(ISession Session,Guid id, int quantity) ;
 
+
         DataJsonResult Remove(ISession Session, Guid id);
 
 

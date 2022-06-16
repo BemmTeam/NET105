@@ -8,10 +8,12 @@ namespace NET105.Helper
 
         public const string error = "alert alert-danger"; 
 
+        
         public string Message {get;set;}
 
         public string MessageType {get; set;}
 
+    
         public string Icon {get;set;}
 
         public MessageHelper(string _message , string _type){

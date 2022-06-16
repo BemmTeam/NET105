@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NET105.Entities;
+using NET105.Models;
 
 namespace NET105.Repository
 {
@@ -12,21 +13,31 @@ namespace NET105.Repository
     {
         private readonly ShopContext context;
 
-        // private readonly UserManager<User> userManager;
+        private readonly UserManager<User> userManager;
 
-        public UserRepository(ShopContext context)
+        private readonly RoleManager<IdentityRole> roleManager;
+
+        public UserRepository(ShopContext context, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
             this.context = context;
-            // this.userManager = userManager;
+            this.userManager = userManager;
+            this.roleManager = roleManager;
         }
 
         public async Task<bool> CreateAsync(User user)
         {
             try
             {
-                await context.Users.AddAsync(user);
-                var result = await context.SaveChangesAsync();
-                return result > 0;
+                await userManager.CreateAsync(user,user.Password);
+                 if(user.RoleType == User.Role.Admin )
+                 {
+                    await userManager.AddToRoleAsync(user,RoleName.Admin);
+                 }
+                 else
+                 {
+                    await userManager.AddToRoleAsync(user,RoleName.Staff);
+                 }
+                return true;
 
             }
             catch

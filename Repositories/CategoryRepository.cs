@@ -105,7 +105,7 @@ namespace NET105.Repository
 
         public  IQueryable<Category> GetCategories()
         {
-            return  context.Categories.Select(p => p);
+            return  context.Categories.OrderBy(p => p.Name);
         }
 
      

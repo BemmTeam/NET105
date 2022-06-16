@@ -1,5 +1,6 @@
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -19,7 +20,7 @@ namespace NET105.Repository
 
         public async Task<bool> CreateAsync(Cart cart)
         {
-             try
+            try
             {
                 await context.Carts.AddAsync(cart);
                 var result = await context.SaveChangesAsync();
@@ -50,11 +51,11 @@ namespace NET105.Repository
 
         public async Task<bool> EditAsync(Guid id, Cart cart)
         {
-              try
+            try
             {
                 context.Carts.Update(cart);
-                var result =  await context.SaveChangesAsync();
-                
+                var result = await context.SaveChangesAsync();
+
                 return true;
             }
             catch (DbUpdateConcurrencyException)
@@ -77,16 +78,34 @@ namespace NET105.Repository
 
         public IQueryable<Cart> GetCarts()
         {
-            return  context.Carts.Include(c => c.Payment).Include(c => c.User);
+            return context.Carts.Include(c => c.User).OrderByDescending(x => x.CreatedDate);
         }
 
-     
-      
+        public async Task<Cart> GetViewCartAsync(Guid? id)
+        {
+            var cart = await context.Carts.Include(m => m.User).FirstOrDefaultAsync(m => m.CartId == id);
+            cart.CartDetails = await context.CartDetails.Include(c => c.Product).Where(c => c.CartId == cart.CartId).ToListAsync();
+            return cart;
+        }
+
+
+        public async Task<List<Cart>> GetCartsByUserIdAsync(string id)
+        {
+            var carts = await context.Carts.Where(x => x.UserId == id).Include(m => m.User).ToListAsync();
+            foreach (var item in carts)
+            {
+                item.CartDetails = await context.CartDetails.Include(c => c.Product).Where(c => c.CartId == item.CartId).ToListAsync();
+            }
+
+            return carts;
+        }
+
+
 
         public async Task<Cart> GetCartAsync(Guid? id)
         {
-          var  cart = await context.Carts.Include(m => m.Payment).Include(m => m.User).FirstOrDefaultAsync(m => m.CartId == id);
-          return cart;
+            var cart = await context.Carts.Include(m => m.User).FirstOrDefaultAsync(m => m.CartId == id);
+            return cart;
         }
 
         private bool CartExists(Guid id)
@@ -96,14 +115,39 @@ namespace NET105.Repository
 
         public SelectList GetSelectListUsers()
         {
-            return new SelectList(context.Users, "Id", "Id");
+            return new SelectList(context.Users, "Id", "FullName");
 
         }
 
-        public SelectList GetSelectListPayments()
-        {
-          return new SelectList(context.Payments, "PaymentId", "Name");
 
+        public async Task<bool> AddRangeCartDetail(List<CartDetail> cartDetails)
+        {
+
+            try
+            {
+                await context.CartDetails.AddRangeAsync(cartDetails);
+                await context.SaveChangesAsync();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> UpdateStatusAsync(Guid? id, int Status)
+        {
+            var cart = await context.Carts.FindAsync(id);
+            if (cart != null)
+            {
+                cart.Status = (Cart.StatusType)Status;
+                if (Status == 1) cart.Completed = DateTime.Now;
+                context.Carts.Update(cart);
+                await context.SaveChangesAsync();
+                return true;
+            }
+
+            return false;
         }
     }
 }

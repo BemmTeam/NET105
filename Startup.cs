@@ -39,7 +39,6 @@ namespace NET105
 
             services.AddTransient<IProduct,ProductRepository>();
             services.AddTransient<ICategory,CategoryRepository>();
-            services.AddTransient<IPayment,PaymentRepository>();
             services.AddTransient<Icart,CartRepository>();
             services.AddTransient<IUser,UserRepository>();
             services.AddTransient<ICartDetail,CartDetailRepository>();

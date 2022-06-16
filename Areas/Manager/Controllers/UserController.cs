@@ -23,36 +23,41 @@ namespace NET105.Areas.Controllers
 
     public class UserController : Controller
     {
-         private readonly IUser repository;
+        private readonly IUser repository;
+
+        private readonly IAccount accountSvc;
+
+        public UserController(IUser repository, IAccount accountSvc)
+        {
+            this.repository = repository;
+            this.accountSvc = accountSvc;
+   
+        }
+
         //  private readonly UserManager<User> userManager;
 
         [TempData]
-        public string Message {get;set;}
+        public string Message { get; set; }
 
         [TempData]
-        public string MessageType {get;set;}
+        public string MessageType { get; set; }
 
-        public UserController(IUser repository )
-        {
-            this.repository = repository;
-            // this.userManager = userManager;
-          
-        }
+     
 
         // GET: User
-        public async Task<IActionResult> Index(int? page , string searchString)
+        public async Task<IActionResult> Index(int? page, string searchString)
         {
-            page??= 1;
-        
-            IQueryable<User> users =  repository.GetUsers();
+            page ??= 1;
 
-            if(!string.IsNullOrEmpty(searchString)) 
+            IQueryable<User> users = repository.GetUsers();
+
+            if (!string.IsNullOrEmpty(searchString))
             {
                 users = users.Where(user => user.FullName.ToLower().Contains(searchString.ToLower()));
-                
+
                 ViewBag.searchString = searchString;
             }
-            return View (await users.ToPagedListAsync((int)page, 5));
+            return View(await users.ToPagedListAsync((int)page, 5));
         }
 
         // GET: User/Details/5
@@ -78,33 +83,34 @@ namespace NET105.Areas.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("FullName,Address,City,District,Id,UserName,NormalizedUserName,Email,NormalizedEmail,EmailConfirmed,PasswordHash,SecurityStamp,ConcurrencyStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEnd,LockoutEnabled,AccessFailedCount")] User user)
+        public async Task<IActionResult> Create([Bind("FullName, Password, RoleType , Address,City,District,Id,UserName,NormalizedUserName,Email,NormalizedEmail,EmailConfirmed,PasswordHash,SecurityStamp,ConcurrencyStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEnd,LockoutEnabled,AccessFailedCount")] User user)
         {
             if (ModelState.IsValid)
             {
-                if(await repository.CreateAsync(user))
+                if (await repository.CreateAsync(user))
                 {
-                    Message = "Thêm danh mục thành công !";
+                    Message = "Thêm người dùng thành công !";
                     MessageType = MessageHelper.success;
 
                     return RedirectToAction(nameof(Index));
 
                 }
             }
-            Message = "Thêm danh mục không thành công !";
-            MessageType = MessageHelper.error;
+
+            ViewData["Message"] = "Thêm người dùng không thành công !";
+            ViewData["MessageType"] = MessageHelper.error;
             return View(user);
         }
 
         // GET: User/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
-             var user = await repository.FindUserAsync(id);
+            var user = await repository.FindUserAsync(id);
             if (user == null)
             {
                 return NotFound();
             }
-          
+
             return View(user);
         }
 
@@ -113,30 +119,63 @@ namespace NET105.Areas.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("FullName,Address,City,District,Id,UserName,NormalizedUserName,Email,NormalizedEmail,EmailConfirmed,PasswordHash,SecurityStamp,ConcurrencyStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEnd,LockoutEnabled,AccessFailedCount")] User user)
+        public async Task<IActionResult> Edit(string id, [Bind("FullName,Address,City,District,Id,UserName,NormalizedUserName,Email,NormalizedEmail,EmailConfirmed,PasswordHash,SecurityStamp,ConcurrencyStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEnd,LockoutEnabled,AccessFailedCount,Password")] User user)
         {
-           if (id != user.Id)
+            if (id != user.Id)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
-               
-                if(await repository.EditAsync(id , user))
-                {
-                    Message = "Cập nhật danh mục thành công !";
-                    MessageType = MessageHelper.success;
-                }
+
+                await accountSvc.UpdateUserAsync(id, user);
+
+                    Message = "Cập nhật người dùng thành công !";
+                MessageType = MessageHelper.success;
+
                 return RedirectToAction(nameof(Index));
             }
-            Message = "Cập nhật danh mục thất bại";
-            MessageType = MessageHelper.error;
-        
+
+            ViewData["Message"] = "Cập nhật người dùng thất bại";
+            ViewData["MessageType"] = MessageHelper.error;
             return View(user);
         }
 
-    
+        [HttpGet]
+        public async Task<IActionResult> Delete(string id)
+        {
+            if (!User.IsInRole(RoleName.Admin))
+            {
+                Message = "Không đủ quyền xóa user này";
+                MessageType = MessageHelper.success;
+                return RedirectToAction("Index");
+            }
+            var user = await repository.GetUserAsync(id);
+
+            return View(user);
+        }
+
+        [HttpPost(), ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(string id)
+        {
+            if (await repository.DeleteAsync(id))
+            {
+                Message = "Xóa người dùng thành công";
+                MessageType = MessageHelper.success;
+                return RedirectToAction("Index");
+
+            }
+            else
+            {
+                ViewData["Message"] = "Xóa người dùng thất bại";
+                ViewData["MessageType"] = MessageHelper.error;
+                return View();
+            }
+
+        }
+
+
 
     }
 }

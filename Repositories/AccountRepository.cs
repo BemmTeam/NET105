@@ -43,7 +43,7 @@ namespace NET105.Repository
 
         public async Task<bool> SignUpAsync(SignUpModel model, IUrlHelper url, HttpRequest request, string returnUrl)
         {
-            User user = new User { FullName = model.FullName, UserName = model.UserName, Email = model.Email , Address = model.Address };
+            User user = new User { FullName = model.FullName, UserName = model.UserName, Email = model.Email, Address = model.Address };
             var result = await userManager.CreateAsync(user, model.Password);
 
             if (result.Succeeded)
@@ -74,7 +74,7 @@ namespace NET105.Repository
 
         public async Task<bool> ConfirmEmailAsync(string userId, string code)
         {
-            
+
             var user = await userManager.FindByIdAsync(userId);
             if (user == null)
             {
@@ -90,9 +90,48 @@ namespace NET105.Repository
             return result.Succeeded;
         }
 
+
+        public async Task UpdateUserAsync(string id, User user)
+        {
+            var findUser = await userManager.FindByIdAsync(id);
+            findUser.Address = user.Address;
+            findUser.FullName = user.FullName;
+            findUser.UserName = user.UserName;
+            findUser.Email = user.Email;
+            findUser.PhoneNumber = user.PhoneNumber;
+            await userManager.UpdateAsync(findUser);
+        }
         public async Task LogoutAsync()
         {
             await signInManager.SignOutAsync();
+        }
+
+
+        public async Task<User> GetUserAsync(ClaimsPrincipal user)
+        {
+            var userfound = await userManager.GetUserAsync(user);
+
+            return userfound;
+        }
+
+
+        public async Task ChangePassword(ChangePassword model)
+        {
+            var user = await userManager.FindByIdAsync(model.UserId);
+
+            var token = await userManager.GeneratePasswordResetTokenAsync(user);
+
+            var result = await userManager.ResetPasswordAsync(user, token, model.NewPassword);
+        }
+
+        public async Task<bool> CheckPassword(string password)
+        {
+            var passwordValidator = new PasswordValidator<User>();
+            var result = await passwordValidator.ValidateAsync(userManager, null, password);
+
+
+            return result.Succeeded;
+
         }
     }
 }

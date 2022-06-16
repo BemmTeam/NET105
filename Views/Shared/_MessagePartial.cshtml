@@ -2,13 +2,22 @@
 
 @{
     MessageHelper Alert = null;
-    if(TempData["Message"] != null && TempData["MessageType"] != null) {
+    if (TempData["Message"] != null && TempData["MessageType"] != null)
+    {
 
         string message = TempData["Message"].ToString();
         string messageType = TempData["MessageType"].ToString();
-        Alert = new MessageHelper( message,messageType);
-     
-    }   
+        Alert = new MessageHelper(message, messageType);
+
+    }
+    if (ViewData["Message"] != null && ViewData["MessageType"] != null)
+    {
+
+        string message = ViewData["Message"].ToString();
+        string messageType = ViewData["MessageType"].ToString();
+        Alert = new MessageHelper(message, messageType);
+
+    }
 }
 
 @if (Alert != null)

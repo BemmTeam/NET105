@@ -149,11 +149,6 @@ D:\Study\NET105\ASM\NET105\obj\Debug\net5.0\Razor\Areas\Manager\Views\Category\D
 D:\Study\NET105\ASM\NET105\obj\Debug\net5.0\Razor\Areas\Manager\Views\Category\Edit.cshtml.g.cs
 D:\Study\NET105\ASM\NET105\obj\Debug\net5.0\Razor\Areas\Manager\Views\Category\Index.cshtml.g.cs
 D:\Study\NET105\ASM\NET105\obj\Debug\net5.0\Razor\Areas\Manager\Views\DbManager\Index.cshtml.g.cs
-D:\Study\NET105\ASM\NET105\obj\Debug\net5.0\Razor\Areas\Manager\Views\Payment\Create.cshtml.g.cs
-D:\Study\NET105\ASM\NET105\obj\Debug\net5.0\Razor\Areas\Manager\Views\Payment\Delete.cshtml.g.cs
-D:\Study\NET105\ASM\NET105\obj\Debug\net5.0\Razor\Areas\Manager\Views\Payment\Details.cshtml.g.cs
-D:\Study\NET105\ASM\NET105\obj\Debug\net5.0\Razor\Areas\Manager\Views\Payment\Edit.cshtml.g.cs
-D:\Study\NET105\ASM\NET105\obj\Debug\net5.0\Razor\Areas\Manager\Views\Payment\Index.cshtml.g.cs
 D:\Study\NET105\ASM\NET105\obj\Debug\net5.0\Razor\Areas\Manager\Views\Product\Create.cshtml.g.cs
 D:\Study\NET105\ASM\NET105\obj\Debug\net5.0\Razor\Areas\Manager\Views\Product\Delete.cshtml.g.cs
 D:\Study\NET105\ASM\NET105\obj\Debug\net5.0\Razor\Areas\Manager\Views\Product\Details.cshtml.g.cs
@@ -199,3 +194,9 @@ D:\Study\NET105\ASM\NET105\obj\Debug\net5.0\Razor\Views\Account\ErrorConfirmEmai
 D:\Study\NET105\ASM\NET105\obj\Debug\net5.0\Razor\Views\Account\ConfirmEmail.cshtml.g.cs
 D:\Study\NET105\ASM\NET105\obj\Debug\net5.0\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
 D:\Study\NET105\ASM\NET105\obj\Debug\net5.0\Razor\Views\Account\AccessDenied.cshtml.g.cs
+D:\Study\NET105\ASM\NET105\obj\Debug\net5.0\Razor\Views\Cart\View.cshtml.g.cs
+D:\Study\NET105\ASM\NET105\obj\Debug\net5.0\Razor\Areas\Manager\Views\User\Delete.cshtml.g.cs
+D:\Study\NET105\ASM\NET105\obj\Debug\net5.0\Razor\Views\Account\InfoUser.cshtml.g.cs
+D:\Study\NET105\ASM\NET105\obj\Debug\net5.0\Razor\Views\Account\UpdateUser.cshtml.g.cs
+D:\Study\NET105\ASM\NET105\obj\Debug\net5.0\Razor\Views\Account\ChangePassword.cshtml.g.cs
+D:\Study\NET105\ASM\NET105\obj\Debug\net5.0\Razor\Views\Cart\History.cshtml.g.cs

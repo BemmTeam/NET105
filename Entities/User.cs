@@ -9,6 +9,10 @@ namespace NET105.Entities
  
     public class User : IdentityUser
     {   
+        public enum Role {
+            Admin = 1 , 
+            Staff = 2
+        }
         [Display(Name = "Họ và tên")]
         [Column(TypeName = "nvarchar(100)")]
         [Required(ErrorMessage = "{0} là phải nhập")]
@@ -26,6 +30,10 @@ namespace NET105.Entities
          [Display(Name = "Mật khẩu")]
         [Required(ErrorMessage = "{0} là phải nhập")]
         public string Password {get;set;}
+
+        [NotMapped]
+        [Display(Name = "Quyền truy cập")]
+        public Role RoleType {get;set;}
 
     }
 }

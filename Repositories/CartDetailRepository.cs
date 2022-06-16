@@ -26,6 +26,11 @@ namespace NET105.Repository
         public async Task<DataJsonResult> AddCartAsync(ISession Session,Guid id, int quantity)
         {
             var product = await productSvc.FindProductAsync(id);
+            if(product.Quantity < quantity)
+            {
+                return new DataJsonResult { IsSuccess = false, Message = "Món ăn đã hết"  };
+
+            }
             float price = product.Price;
             CartDetail cart = null;
             var carts = SessionHelper.GetObjectFormJson<List<CartDetail>>(Session,"carts");
@@ -35,7 +40,7 @@ namespace NET105.Repository
                 if (carts == null)
                 {
                     carts = new List<CartDetail>();
-                    carts.Add(cart = new() { CartDetailId = Guid.NewGuid().ToString(), ProductId = product.ProductId, Product = product, Quantity = quantity, Price = price });
+                    carts.Add(cart = new() { CartDetailId = Guid.NewGuid().ToString(), ProductId = product.ProductId, Product = product, Quantity = quantity, Price = price * quantity });
                 }
                 else
                 {
@@ -45,12 +50,13 @@ namespace NET105.Repository
                         cart = new();
                         cart = carts[index];
                         carts[index].Quantity += quantity;
+                        carts[index].Price = price  * carts[index].Quantity;
 
                     }
 
                     else
                     {
-                        carts.Add(cart = new() { CartDetailId = Guid.NewGuid().ToString(), ProductId = product.ProductId, Product = product, Quantity = quantity, Price = price });
+                        carts.Add(cart = new() { CartDetailId = Guid.NewGuid().ToString(), ProductId = product.ProductId, Product = product, Quantity = quantity, Price = price * quantity });
                     }
                 }
                 SessionHelper.SetObjectAsJson(Session,"carts", carts);

@@ -1,12 +1,13 @@
 @model IPagedList<NET105.Entities.Cart>
 @using Z.PagedList;
 @using Z.PagedList.Mvc.Core;
+@using NET105.Entities;
 @{
     ViewData["Title"] = "Danh sách giỏ hàng";
 }
 
 <div class="row">
-
+    <link rel="stylesheet" href="/css/alert.css">
     @await Html.PartialAsync("_MessagePartial")
     <div class="col-sm-12">
         <div class="white-box">
@@ -35,17 +36,15 @@
                                 @Html.DisplayNameFor(model => Model[0].Address)
                             </th>
                             <th class="border-top-0">
-                                @Html.DisplayNameFor(model => Model[0].Status)
+                                @Html.DisplayNameFor(model => Model[0].Status) </i>
                             </th>
                             @* <th class="border-top-0">
                                 @Html.DisplayNameFor(model => Model[0].CartDetail_Json)
                             </th> *@
                             <th class="border-top-0">
-                                @Html.DisplayNameFor(model => Model[0].User)
+                                @Html.DisplayNameFor(model => Model[0].User.FullName)
                             </th>
-                            <th class="border-top-0">
-                                @Html.DisplayNameFor(model => Model[0].Payment)
-                            </th>
+                       
 
                             <th class="border-top-0"></th>
                         </tr>
@@ -65,17 +64,33 @@
                                     @Html.DisplayFor(modelItem => item.Address)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Status)
+                                    @switch (item.Status)
+						{
+							case Cart.StatusType.Shipping:
+								<span data-toggle="modal" data-target="#StatusModal" data-id="@item.CartId" style="font-size: 16px; cursor:pointer;" class="btnUpdate badge bg-warning  text-light">Đang giao hàng <i  class="fas fa-redo text-dark"></i></span >
+								break;
+
+							case Cart.StatusType.Success:
+								<span data-toggle="modal" data-target="#StatusModal" data-id="@item.CartId" style="font-size: 16px; cursor:pointer;" class="btnUpdate badge bg-success  text-light">Đã hoàn thành <i class="fas fa-redo text-dark"></i></span >
+								break;
+
+							case Cart.StatusType.Cancel:
+								<span data-toggle="modal" data-target="#StatusModal" data-id="@item.CartId" style="font-size: 16px; cursor:pointer;" class="btnUpdate badge bg-danger  text-light">Đơn hàng bị hủy <i  class="fas fa-redo text-dark"></i></span>
+								break;
+
+							default:
+								<span data-toggle="modal" data-target="#StatusModal" data-id="@item.CartId" style="font-size: 16px; cursor:pointer;" class="btnUpdate badge bg-success  text-light">Không tìm thấy <i  class="fas fa-redo text-dark"></i></span >
+
+								break;
+						}
                                 </td>
                                 @* <td>
                                     @Html.DisplayFor(modelItem => item.CartDetail_Json)
                                 </td> *@
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.User.Id)
+                                    @Html.DisplayFor(modelItem => item.User.FullName)
                                 </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Payment.Name)
-                                </td>
+                          
 
                                 <td>
                                     <a class="btn btn-warning text-light" asp-action="Edit"
@@ -100,3 +115,71 @@
         </div>
     </div>
 </div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="StatusModal" tabindex="-1" role="dialog" aria-labelledby="RemoveModalTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-light">
+                <h5 class="modal-title" id="exampleModalLongTitle"><i class="fab fa-dashcube"></i> Cập nhật trạng thái
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="text-light" aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="StatusId" hidden>
+
+                <div class="row">
+                    <dt class="col-sm-4">
+                        Trạng thái: 
+                    </dt>
+                    <dd class="col-sm-8">
+                        <select id="status" class="form-control" asp-items="@Html.GetEnumSelectList<Cart.StatusType>()"></select>
+                        <hr>
+                    </dd>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                <button type="button" id="btnUpdateStatus" data-dismiss="modal" class="btn btn-success">Cập nhật</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="alertMessage"></div>
+@section Scripts
+{
+
+    <script src="/js/alert.js"></script>
+   <script>
+     $(document).on("click", ".btnUpdate", function () {
+
+        var _id = $(this).data("id");
+        $("#StatusId").val(_id);
+    })
+
+    $("#btnUpdateStatus").off("click").on("click" , function(){
+
+        var _id = $("#StatusId").val();
+        var _status = $("#status").val();
+        $.ajax({
+            url: "/manager/cart/UpdateStatus",
+            type: "post",
+            data: {
+                id: _id, 
+                Status: _status
+            },
+            success: function(reponse)
+            {
+                ShowAlert(reponse.message , reponse.isSuccess);
+                location.reload();
+            }
+        })
+    })
+
+   </script>
+}
